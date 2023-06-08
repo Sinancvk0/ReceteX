@@ -12,17 +12,13 @@ namespace ReceteX.Models
 		public virtual Prescription? Prescription { get; set; }
 		public Guid MedicineId { get; set; }
 		public virtual Medicine? Medicine { get; set; }
-
 		public int Quantity { get; set; }
-
 		public int Dose1 { get; set; }
 		public int Dose2 { get; set; }
-
+		public int period { get; set; }
 		public int MedicineUsagePeriodId { get; set; }
-
 		public virtual MedicineUsagePeriod? MedicineUsagePeriod { get; set; }
 		public int MedicineUsageTypeId { get; set; }
-
 		public virtual MedicineUsageType? MedicineUsageType { get; set; }
 	}
 }

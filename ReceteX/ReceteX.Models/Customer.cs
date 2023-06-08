@@ -8,7 +8,7 @@ namespace ReceteX.Models
 {
 	public class Customer:BaseModel
 	{
-
+		public ICollection <AppUser>? AppUsers { get; set; }
 
 	}
 }

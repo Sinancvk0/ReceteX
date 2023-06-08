@@ -25,7 +25,11 @@ namespace ReceteX.Models
 		public string? PatientLastName { get; set; }
 		public string? PatientGsm { get; set; }
 		public string? TCKN { get; set; }
+		public string?Gender { get; set; } = "E";
+		public string? BirthDate { get; set; } = "01.01.1985";
 		public string? PrescriptionNo { get; set; }
+
+	
 
 
 
