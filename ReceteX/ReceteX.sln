@@ -5,6 +5,14 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceteX.Web", "ReceteX.Web\ReceteX.Web.csproj", "{DF331BB2-98EA-4C25-83CA-31636A9D7577}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceteX.Models", "ReceteX.Models\ReceteX.Models.csproj", "{18A1AE79-0B76-4C1F-BDEB-D7E45BBB1CA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceteX.Data", "ReceteX.Data\ReceteX.Data.csproj", "{EA0449DD-9F04-47B6-9A01-1B24F77F37B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceteX.Utility", "ReceteX.Utility\ReceteX.Utility.csproj", "{6C0BBBCF-6651-4F70-8B31-62E12504C381}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceteX.Repository", "ReceteX.Repository\ReceteX.Repository.csproj", "{EC2396D7-349F-4363-82F0-6530961AE298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{DF331BB2-98EA-4C25-83CA-31636A9D7577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF331BB2-98EA-4C25-83CA-31636A9D7577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF331BB2-98EA-4C25-83CA-31636A9D7577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18A1AE79-0B76-4C1F-BDEB-D7E45BBB1CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18A1AE79-0B76-4C1F-BDEB-D7E45BBB1CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18A1AE79-0B76-4C1F-BDEB-D7E45BBB1CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18A1AE79-0B76-4C1F-BDEB-D7E45BBB1CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA0449DD-9F04-47B6-9A01-1B24F77F37B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA0449DD-9F04-47B6-9A01-1B24F77F37B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA0449DD-9F04-47B6-9A01-1B24F77F37B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA0449DD-9F04-47B6-9A01-1B24F77F37B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0BBBCF-6651-4F70-8B31-62E12504C381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0BBBCF-6651-4F70-8B31-62E12504C381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0BBBCF-6651-4F70-8B31-62E12504C381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0BBBCF-6651-4F70-8B31-62E12504C381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2396D7-349F-4363-82F0-6530961AE298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2396D7-349F-4363-82F0-6530961AE298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2396D7-349F-4363-82F0-6530961AE298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2396D7-349F-4363-82F0-6530961AE298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
