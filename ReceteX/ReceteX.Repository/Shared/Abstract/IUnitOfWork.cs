@@ -9,7 +9,7 @@ namespace ReceteX.Repository.Shared.Abstract
 {
 	public interface IUnitOfWork
 	{
-		IRepository<AppUser> AppUsers { get; }
+		IRepository<AppUser> Users { get; }
 		IRepository<Customer> Customers { get; }
 		IRepository<Description> Descriptions { get; }
 		IRepository<DescriptionType> DescriptionTypes { get; }

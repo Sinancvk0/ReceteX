@@ -11,7 +11,7 @@ namespace ReceteX.Repository.Shared.Concrete
 {
 	public class UnitOfWork : IUnitOfWork
 	{
-		public IRepository<AppUser> AppUsers { get; private set; }
+		public IRepository<AppUser> Users { get; private set; }
 
 		public IRepository<Customer> Customers { get; private set; }
 
@@ -39,7 +39,7 @@ namespace ReceteX.Repository.Shared.Concrete
 		public UnitOfWork(ApplicationDbContext db)
 		{
 			_db = db;
-			AppUsers = new Repository<AppUser>(db);
+			Users = new Repository<AppUser>(db);
 			Customers = new Repository<Customer>(db);
 			Descriptions = new Repository<Description>(db);
 			DescriptionTypes = new Repository<DescriptionType>(db);

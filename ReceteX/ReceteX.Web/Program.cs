@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ReceteX.Data;
+using ReceteX.Repository.Shared.Abstract;
+using ReceteX.Repository.Shared.Concrete;
+
 
 namespace ReceteX.Web
 {
@@ -7,13 +11,22 @@ namespace ReceteX.Web
 	{
 		public static void Main(string[] args)
 		{
+			//Programýmýzýn login iþlemi gerektirdiðine  dair autho tanýmlýyoruz.
+
 			var builder = WebApplication.CreateBuilder(args);
+
+			
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+			builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+	options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
-			builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connstr")));	
+			builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connstr")));
 
+
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			var app = builder.Build();
 
@@ -29,7 +42,7 @@ namespace ReceteX.Web
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.MapControllerRoute(

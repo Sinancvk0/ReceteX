@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,10 @@ namespace ReceteX.Models
 		public string? PinCOde { get; set; }
 		public int? CityCode { get; set; }
 		public string MedulaPassword { get; set; }
+
+		public bool isAdmin { get; set; } = false;
+
+		public bool isActive { get; set; } = true;	
 
 
 	}

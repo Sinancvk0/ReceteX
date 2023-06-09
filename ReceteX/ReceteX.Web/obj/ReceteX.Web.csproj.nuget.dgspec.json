@@ -124,6 +124,68 @@
         }
       }
     },
+    "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Repository\\ReceteX.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Repository\\ReceteX.Repository.csproj",
+        "projectName": "ReceteX.Repository",
+        "projectPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Repository\\ReceteX.Repository.csproj",
+        "packagesPath": "C:\\Users\\sinan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\sinan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Data\\ReceteX.Data.csproj": {
+                "projectPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Data\\ReceteX.Data.csproj"
+              },
+              "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Models\\ReceteX.Models.csproj": {
+                "projectPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Models\\ReceteX.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Web\\ReceteX.Web.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -150,6 +212,12 @@
             "projectReferences": {
               "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Data\\ReceteX.Data.csproj": {
                 "projectPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Data\\ReceteX.Data.csproj"
+              },
+              "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Models\\ReceteX.Models.csproj": {
+                "projectPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Models\\ReceteX.Models.csproj"
+              },
+              "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Repository\\ReceteX.Repository.csproj": {
+                "projectPath": "C:\\Users\\sinan\\Desktop\\ReceteX\\ReceteX\\ReceteX.Repository\\ReceteX.Repository.csproj"
               }
             }
           }
@@ -164,6 +232,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.5, )"
