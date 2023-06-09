@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ReceteX",
+    "\\ReceteX\\ReceteX.Web"
   ],
+  "SelectedNode": "\\ReceteX\\ReceteX.Web\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }

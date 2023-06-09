@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using ReceteX.Data;
+
 namespace ReceteX.Web
 {
 	public class Program
@@ -8,6 +11,9 @@ namespace ReceteX.Web
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+
+			builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connstr")));	
+
 
 			var app = builder.Build();
 
