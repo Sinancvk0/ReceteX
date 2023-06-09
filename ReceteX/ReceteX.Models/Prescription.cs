@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReceteX.Models
 {
-	public class Prescription
+	public class Prescription:BaseModel
 	{
 		public Guid AppUserId { get; set; }
 		public virtual AppUser? AppUser { get; set; }

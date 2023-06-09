@@ -9,8 +9,11 @@
   <ItemGroup>
     <Folder Include="Abstract\" />
     <Folder Include="Concrete\" />
-    <Folder Include="Shared\Abstract\" />
-    <Folder Include="Shared\Concrete\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ReceteX.Data\ReceteX.Data.csproj" />
+    <ProjectReference Include="..\ReceteX.Models\ReceteX.Models.csproj" />
   </ItemGroup>
 
 </Project>

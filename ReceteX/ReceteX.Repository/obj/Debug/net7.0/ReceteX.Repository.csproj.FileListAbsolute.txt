@@ -1,0 +1,5 @@
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Repository\obj\Debug\net7.0\ReceteX.Repository.csproj.AssemblyReference.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Repository\obj\Debug\net7.0\ReceteX.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Repository\obj\Debug\net7.0\ReceteX.Repository.AssemblyInfoInputs.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Repository\obj\Debug\net7.0\ReceteX.Repository.AssemblyInfo.cs
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Repository\obj\Debug\net7.0\ReceteX.Repository.csproj.CoreCompileInputs.cache

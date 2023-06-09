@@ -1,0 +1,15 @@
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\bin\Debug\net7.0\ReceteX.Data.deps.json
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\bin\Debug\net7.0\ReceteX.Data.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\bin\Debug\net7.0\ReceteX.Data.pdb
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\bin\Debug\net7.0\ReceteX.Models.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\bin\Debug\net7.0\ReceteX.Models.pdb
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.csproj.AssemblyReference.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.AssemblyInfoInputs.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.AssemblyInfo.cs
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.csproj.CoreCompileInputs.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.csproj.CopyComplete
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\refint\ReceteX.Data.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ReceteX.Data.pdb
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Data\obj\Debug\net7.0\ref\ReceteX.Data.dll

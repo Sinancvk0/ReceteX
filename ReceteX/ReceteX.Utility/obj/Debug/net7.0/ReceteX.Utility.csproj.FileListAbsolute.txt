@@ -1,0 +1,12 @@
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\bin\Debug\net7.0\ReceteX.Utility.deps.json
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\bin\Debug\net7.0\ReceteX.Utility.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\bin\Debug\net7.0\ReceteX.Utility.pdb
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.csproj.AssemblyReference.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.AssemblyInfoInputs.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.AssemblyInfo.cs
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.csproj.CoreCompileInputs.cache
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\refint\ReceteX.Utility.dll
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ReceteX.Utility.pdb
+C:\Users\sinan\Desktop\ReceteX\ReceteX\ReceteX.Utility\obj\Debug\net7.0\ref\ReceteX.Utility.dll
