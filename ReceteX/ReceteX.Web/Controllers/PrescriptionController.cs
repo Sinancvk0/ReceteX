@@ -95,9 +95,6 @@ namespace ReceteX.Web.Controllers
 
 		}
 
-		// projeye tema giydirilecek ve login sayfası yapılacak. login olunca oturum açılacak. sağ üst köşede isim görünecek.
-		//user işlemleri yapılacak. md5 ile eklenecek.
-		// customer controlleri yazılacak. ekleme ve silme yapılacak.
-		// önce customer sonrada user eklenecek.
+		
 	}
 }
