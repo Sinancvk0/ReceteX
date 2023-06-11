@@ -11,19 +11,25 @@ namespace ReceteX.Web
 	{
 		public static void Main(string[] args)
 		{
-			//Programýmýzýn login iþlemi gerektirdiðine  dair autho tanýmlýyoruz.
+          
+            //Programýmýzýn login iþlemi gerektirdiðine  dair autho tanýmlýyoruz.
 
-			var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);
+         
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
 
-			
+            });
 
-			// Add services to the container.
-			builder.Services.AddControllersWithViews();
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
 			builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
 	options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
-			builder.Services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("connstr")));
+			builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("connstr")));
 
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
