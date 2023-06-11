@@ -38,12 +38,12 @@ namespace ReceteX.Repository.Shared.Concrete
 			return dbSet.Where(x => x.isDeleted == false);
 		}
 
-		public virtual IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+		public  virtual IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
 		{
 			return GetAll().Where(predicate);
 		}
 
-		public T GetFirstOrDefault(Expression<Func<T, bool>> predicate)
+		public  virtual T  GetFirstOrDefault(Expression<Func<T, bool>> predicate)
 		{
 			return GetAll().FirstOrDefault(predicate);
 		}

@@ -15,7 +15,7 @@ namespace ReceteX.Models
 
 
 
-		public ICollection<PrescriptionsMedicine>? PrescriptionsMedicines { get; set; }
+		public ICollection<PrescriptionsMedicine>? PrescriptionMedicines { get; set; }
 
 		public ICollection<Description>? Descriptions { get; set; }
 

@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\ReceteX.Repository",
+    "\\ReceteX.Repository\\Shared",
+    "\\ReceteX.Repository\\Shared\\Concrete",
     "\\ReceteX.Web"
   ],
-  "SelectedNode": "\\ReceteX.sln",
+  "SelectedNode": "\\ReceteX.Repository\\Shared\\Concrete\\UnitOfWork.cs",
   "PreviewInSolutionExplorer": false
 }

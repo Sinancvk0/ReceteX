@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ReceteX.Data\ReceteX.Data.csproj" />
     <ProjectReference Include="..\ReceteX.Models\ReceteX.Models.csproj" />
   </ItemGroup>
