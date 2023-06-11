@@ -1,0 +1,158 @@
+﻿
+<div>
+	<div class="card">
+		<div class="card-header  text-white bg-success bg-gradient">
+			<span class="fs-4">Kullanıcı Listesi</span>
+			<a href="#" id="btnEkle" class="btn btn-warning ms-2">Kullanıcı Ekle</a>
+		</div>
+		<div class="card-body">
+			<table id="tblUsers" class="table table-bordered table-striped" style="width:100%">
+				<thead>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+@*----------------------------------------   MODAL BAŞLANGIÇ ---------------------------------*@
+
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+	 aria-labelledby="modalTitleId" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalTitle">Kullanıcı Ekle </h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="mb-3">
+						<label class="form-label">İsim</label>
+						<input type="text" id="txtName" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Soyİsim</label>
+						<input type="text" id="txtSurName" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">TCKN</label>
+						<input type="text" id="txtTC" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">GSM</label>
+						<input type="text" id="txtGSM" class="form-control" />
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Email</label>
+						<input type="text" id="txtEmail" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Şifre</label>
+						<input type="text" id="txtPassword" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Medula Kod</label>
+						<input type="text" id="txtMedulaCode" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Pin Kodu</label>
+						<input type="text" id="txtPinCode" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Şehir Kod</label>
+						<input type="text" id="txtCityCode" class="form-control" />
+					</div>
+				
+					@if (User.IsInRole("Admin"))
+					{
+							<label for="Authorization" class="form-label">Yetki</label>
+
+							<br />
+
+							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+								<input type="radio" class="btn-check" name="Authorization" value="Admin" id="btnradio1" autocomplete="off" checked>
+								<label class="btn btn-outline-danger" for="btnradio1">Admin</label>
+
+								<input type="radio" class="btn-check" name="Authorization" value="User" id="btnradio2" autocomplete="off">
+								<label class="btn btn-outline-success" for="btnradio2">User</label>
+							</div>
+					}
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<a href="#" id="btnSave" class="btn btn-primary">Kaydet</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+@section Scripts{
+		<script>
+			var DataTable;
+			$(document).ready(function () {
+
+				//DataTable GetAll Bölümü
+				DataTable = $('#tblUsers').DataTable({
+					ajax: '/User/GetAll',
+					columns: [
+						{ data: 'id', title: "Id" },
+						{ data: 'name', title: "Name" },
+						{ data: 'surname', title: "SurName" },
+						{ data: 'gsm', title: "GSM" },
+						{ data: 'tckn', title: "TCKN" },
+						{ data: 'email', title: "Email" },
+					]
+				});
+
+				$("#btnEkle").click(function () {
+					$("#modalTitle").text("Kullanıcı Ekle");
+					$("#btnSave").text("Kaydet").removeClass('btn-success').addClass('btn-primary');
+					$("#modal").modal('show');
+
+					$('#btnSave').off();
+					$('#btnSave').click(function () {
+						let user = {
+							name: $("#txtName").val(),
+							surName: $("#txtSurName").val(),
+							tckn: $("#txtTC").val(),
+							gsm: $("#txtGSM").val(),
+							email: $("#txtEmail").val(),
+							password: $("#txtPassword").val(),
+							medulaPassword: $("#txtMedulaCode").val(),
+							pinCode: $("#txtPinCode").val(),
+							cityCode: $("#txtCityCode").val(),
+							isAdmin: function () { return ($("input[name='Authorization']:checked").val() == "Admin"); }
+						};
+
+						console.log(user.isAdmin);
+						$.ajax({
+							type: "POST",
+							url: "/User/Create",
+							data: user,
+							success: function (res) {
+								$("#modal").modal("hide");
+								toastr.success("Kullanıcı Eklendi");
+								$("#txtName").val('');
+								$("#txtSurName").val('');
+								$("#txtTC").val('');
+								$("#txtGSM").val('');
+								$("#txtEmail").val('');
+								$("#txtPassword").val('');
+								$("#txtMedulaCode").val('');
+								$("#txtPinCode").val('');
+								$("#txtCityCode").val('');
+								DataTable.ajax.reload();
+							},
+							error: function () {
+								$("#modal").modal("hide");
+								toastr.error("Kullanıcı Eklenemedi!!");
+							}
+						});
+					});
+				});
+			});
+		</script>
+} 
