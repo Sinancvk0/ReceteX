@@ -98,7 +98,7 @@
 				DataTable = $('#tblUsers').DataTable({
 					ajax: '/User/GetAll',
 					columns: [
-						{ data: 'id', title: "Id" },
+						{ data: 'ıd', title: "Id" },
 						{ data: 'name', title: "Name" },
 						{ data: 'surname', title: "SurName" },
 						{ data: 'gsm', title: "GSM" },
@@ -106,6 +106,7 @@
 						{ data: 'email', title: "Email" },
 					]
 				});
+				//Ekle Create Bölümü 
 
 				$("#btnEkle").click(function () {
 					$("#modalTitle").text("Kullanıcı Ekle");
@@ -152,6 +153,12 @@
 							}
 						});
 					});
+
+                   // Silme Remove Alanı
+
+				 
+
+
 				});
 			});
 		</script>

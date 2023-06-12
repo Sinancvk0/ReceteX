@@ -6,6 +6,6 @@
     "\\ReceteX.Repository\\Shared\\Concrete",
     "\\ReceteX.Web"
   ],
-  "SelectedNode": "\\ReceteX.sln",
+  "SelectedNode": "\\ReceteX.Web\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }

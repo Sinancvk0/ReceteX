@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\ReceteX",
+    "\\ReceteX\\ReceteX.Data",
     "\\ReceteX\\ReceteX.Web"
   ],
-  "SelectedNode": "\\ReceteX\\ReceteX.Web\\appsettings.json",
+  "SelectedNode": "\\ReceteX\\ReceteX.Data\\ApplicationDbContext.cs",
   "PreviewInSolutionExplorer": false
 }
