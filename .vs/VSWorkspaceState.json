@@ -3,8 +3,10 @@
     "",
     "\\ReceteX",
     "\\ReceteX\\ReceteX.Data",
-    "\\ReceteX\\ReceteX.Web"
+    "\\ReceteX\\ReceteX.Web",
+    "\\ReceteX\\ReceteX.Web\\Views",
+    "\\ReceteX\\ReceteX.Web\\Views\\Customer"
   ],
-  "SelectedNode": "\\ReceteX\\ReceteX.Data\\ApplicationDbContext.cs",
+  "SelectedNode": "\\ReceteX\\ReceteX.Web\\Views\\Customer\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

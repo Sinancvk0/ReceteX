@@ -43,10 +43,10 @@
 
 			fillDataTable();
 
-			$("#btnEkle").click(function () {
+			$("#btnEkle").click( function () {
 				$('#modal').modal("show");
 				$('#txtName').val("");
-				$('#btnSave').click(function () {
+				$('#btnSave').one("click", function () {
 					addCustomer();
 				});
 			})
@@ -109,6 +109,36 @@
 				]
 			});
 		}
+		function editCustomer(id) {
+			$("#modalTitle").text("Müşteri Düzenle");
+			$("#btnSave").text("Güncelle").removeClass('btn-primary').addClass('btn-success');
+			$.ajax({
+				type: 'POST',
+				url: '/Customer/GetById',
+				data: { id: id },
+				success: function (res) {
+					$('#txtName').val(res.name);
+					$('#btnSave').off();
+					$('#btnSave').click(function () {
+						$.ajax({
+							type: 'POST',
+							url: '/Customer/Update',
+							data: {
+								id: id,
+								name: $('#txtName').val()
+							},
+							success: function () {
+								$('#modal').modal('hide');
+								toastr.success("Başarıyla güncellendi");
+								DataTable.ajax.reload();
+							}
+						});
+					});
+					$("#modal").modal("show");
+				}
+			});
+		}
+
 
 		function addCustomer() {
 			$.ajax({
