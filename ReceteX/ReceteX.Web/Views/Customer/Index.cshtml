@@ -1,92 +1,133 @@
-﻿
-<div>
+﻿<div>
 	<div class="card">
 		<div class="card-header  text-white bg-success bg-gradient">
-			<span class="fs-4">Kullanıcı Listesi</span>
-			<a href="#" id="btnEkle" class="btn btn-warning ms-2">Kullanıcı Ekle</a>
+			<span class="fs-4">Müşteri Listesi</span>
+			<a href="#" id="btnEkle" class="btn btn-warning ms-2">Müşteri Ekle</a>
 		</div>
 		<div class="card-body">
-			<table id="tblCustomer" class="table table-bordered table-striped" style="width:100%">
+			<table id="tblCustomers" class="table table-bordered table-striped" style="width:100%">
 				<thead>
 				</thead>
 			</table>
 		</div>
 	</div>
 </div>
-
-
-@*----------------------------------------  MODAL ---------------------------------*@
-
-<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-	 aria-labelledby="modalTitleId" aria-hidden="true">
+@*----------------------- CUSTOMER MODAL ---------------------------*@
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modalTitle">Müşteri Ekle </h5>
+				<h5 class="modal-title" id="modalTitleId">Müşteri Ekle </h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<div class="container">
-					
 					<div class="mb-3">
-						<label class="form-label">Ad</label>
-						<input id="txtName" class="form-control" />
+						<label class="form-label">Müşteri Adı</label>
+						<input type="text" id="txtName" class="form-control">
 					</div>
-				
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<a href="#" id="btnSave" class="btn btn-primary">Kaydet</a>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+				<a href="#" id="btnSave" class="btn btn-primary">Ekle</a>
 			</div>
 		</div>
 	</div>
 </div>
 
 @section Scripts{
-
 	<script>
-var DataTable;
-$(document).ready(function(){
+		var DataTable;
+		$(document).ready(function () {
 
-  DataTable = $('#tblCustomer').DataTable({
-    ajax: '/Customer/GetAll',
-    columns: [
-      { data: 'id', title: "Id" },
-      { data: 'name', title: "Name" }
-    ]
-  });
+			fillDataTable();
 
-  $('#btnEkle').click(function() {
-    $('#modalTitle').text("Müşteri Ekle");
-    $('#btnSave').text("Kaydet").removeClass('btn-success').addClass('btn-primary');
-    $('#modal').modal('show');
-    $('#btnSave').off();
-    $('#btnSave').click(function() {
-      let customer = {
-        name: $('#txtName').val()
-      };
-      $.ajax({
-        type: "POST",
-        url: "/Customer/Create",
-        data: customer,
-        success: function(res) {
-          $("#modal").modal("hide");
-          toastr.success("Müşteri Eklendi");
-          $("#txtName").val('');
-          DataTable.ajax.reload();
-        },
-        error: function() {
-          $("#modal").modal("hide");
-          toastr.error("Kullanıcı Eklenemedi!!");
-        }
-      });
-    });
-  });
-});
-</script>
+			$("#btnEkle").click(function () {
+				$('#modal').modal("show");
+				$('#txtName').val("");
+				$('#btnSave').click(function () {
+					addCustomer();
+				});
+			})
 
 
-}
+
+		});
+		// ---------------------------------------- Müşteri Silme Fonksiyonu BAŞLANGIÇ
+		function deleteCustomer(id) {
+			Swal.fire({
+				title: 'Silmek istediğinize emin misiniz?',
+				text: "Müşteri Silinecek",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sil!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: 'POST',
+						url: '/Customer/Delete',
+						data: { id: id },
+						success: function () {
+							Swal.fire(
+								'Başarılı!',
+								'Kullanıcı Silindi',
+								'success'
+							);
+							DataTable.ajax.reload();
+						},
+						error: function () {
+							Swal.fire({
+								icon: 'error',
+								title: 'Müşteri Silme İşlemi Başarısız!',
+								text: 'Bir şeyler yanlış gitti!'
+							});
+						}
+					});
+				}
+			});
+		}
+
+		// ------------------------------------ Müşteri  Silme Fonksiyonu BİTİŞ
+
+
+		function fillDataTable() {
+			DataTable = $('#tblCustomers').DataTable({
+				ajax: '/Customer/GetAll',
+				columns: [
+					{ data: 'id', title: "Id", width: '400px' },
+					{ data: 'name', title: "Ad" },
+					{data:'totalUsers',title:"Kullanıcı Sayısı"},
+					{
+						data: 'id', title: 'İşlemler', render: function (data) {
+							return ` <a href="#" onclick="deleteCustomer('${data}')" class="btn btn-sm btn-danger">Sil</a>
+														<a href="#" onclick="editCustomer('${data}')" class="btn btn-sm btn-primary">Düzenle</a> `
+						}
+					}
+				]
+			});
+		}
+
+		function addCustomer() {
+			$.ajax({
+				type: "POST",
+				url: "/Customer/Create",
+				data: { name: $("#txtName").val() },
+				success: function (res) {
+					$('#txtName').val("");
+					toastr.success("Müşteri Başarıyla Eklendi.");
+					$('#modal').modal('hide')
+					DataTable.ajax.reload();
+				},
+				error: function () {
+					toastr.error("Müşteri Eklenirken Hata Oluştu!!");
+				}
+			})
+		}
+
+	</script>
+	}
 
 

@@ -12,7 +12,7 @@ using ReceteX.Data;
 namespace ReceteX.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230611173611_Mig_1")]
+    [Migration("20230612150537_Mig_1")]
     partial class Mig_1
     {
         /// <inheritdoc />
@@ -72,6 +72,9 @@ namespace ReceteX.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isRememberMe")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -323,16 +326,10 @@ namespace ReceteX.Data.Migrations
                     b.Property<Guid>("MedicineId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("MedicineUsagePeriodId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("MedicineUsagePeriodId1")
+                    b.Property<Guid>("MedicineUsagePeriodId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("MedicineUsageTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("MedicineUsageTypeId1")
+                    b.Property<Guid>("MedicineUsageTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -354,9 +351,9 @@ namespace ReceteX.Data.Migrations
 
                     b.HasIndex("MedicineId");
 
-                    b.HasIndex("MedicineUsagePeriodId1");
+                    b.HasIndex("MedicineUsagePeriodId");
 
-                    b.HasIndex("MedicineUsageTypeId1");
+                    b.HasIndex("MedicineUsageTypeId");
 
                     b.HasIndex("PrescriptionId");
 
@@ -445,11 +442,15 @@ namespace ReceteX.Data.Migrations
 
                     b.HasOne("ReceteX.Models.MedicineUsagePeriod", "MedicineUsagePeriod")
                         .WithMany()
-                        .HasForeignKey("MedicineUsagePeriodId1");
+                        .HasForeignKey("MedicineUsagePeriodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ReceteX.Models.MedicineUsageType", "MedicineUsageType")
                         .WithMany()
-                        .HasForeignKey("MedicineUsageTypeId1");
+                        .HasForeignKey("MedicineUsageTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ReceteX.Models.Prescription", "Prescription")
                         .WithMany("PrescriptionMedicines")

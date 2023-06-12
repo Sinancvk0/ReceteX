@@ -98,7 +98,8 @@
 				DataTable = $('#tblUsers').DataTable({
 					ajax: '/User/GetAll',
 					columns: [
-						{ data: 'ıd', title: "Id" },
+						{ data: 'id', title: "Id" },
+						{data: 'customerId',title:"CustomerId" },
 						{ data: 'name', title: "Name" },
 						{ data: 'surname', title: "SurName" },
 						{ data: 'gsm', title: "GSM" },

@@ -16,9 +16,9 @@ namespace ReceteX.Models
 		public int Dose1 { get; set; }
 		public int Dose2 { get; set; }
 		public int period { get; set; }
-		public int MedicineUsagePeriodId { get; set; }
+		public Guid MedicineUsagePeriodId { get; set; }
 		public virtual MedicineUsagePeriod? MedicineUsagePeriod { get; set; }
-		public int MedicineUsageTypeId { get; set; }
+		public Guid MedicineUsageTypeId { get; set; }
 		public virtual MedicineUsageType? MedicineUsageType { get; set; }
 	}
 }

@@ -103,7 +103,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="~/assets/images/users/avatar-4.jpg"
                                  alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">@User.FindFirstValue(ClaimTypes.GivenName)</span>
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">@User.FindFirstValue(ClaimTypes.Name)</span>
                             <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -152,29 +152,21 @@
                                 <i class="bi bi-house"></i><span>Ana Sayfa</span>
                             </a>
                         </li>
-                        <li>
-                            <a asp-action="Index" asp-controller="User">
-                                <i class="uil-users-alt"></i><span>Kullanıcı Yönetimi</span>
-                            </a>
-                        </li>
-                            <li>
-                            <a asp-action="Index" asp-controller="Prescription">
-                                <i class="bi bi-file-earmark-medical"></i><span>Reçete Yaz</span>
-                            </a>
-                        </li>
-                     
-                            <li>
-                            <a asp-action="Index" asp-controller="Medicine">
-                                <i class="bi bi-capsule">></i><span>İlaç Listesi</span>
-                            </a>
-                        </li>
 
                         <li>
-                            <a asp-action="Index" asp-controller="Diagnosis">
-                                <i class="bi bi-doctor"></i><span>Tanı Listesi</span>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="uil-window-section"></i>
+                                <span>Yönetsel</span>
                             </a>
-                        </li>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a asp-controller="User" asp-action="Index">Kullanıcılar</a></li>
 
+
+                                <li><a asp-controller="Customer" asp-action="Index">Müşteriler</a></li>
+                                <li><a asp-controller="Medicine" asp-action="Index">İlaç Listesi</a></li>
+                                <li><a asp-controller="Diagnosis" asp-action="Index">Tanı Listesi</a></li>
+                            </ul>
+                        </li>
 
 
                     </ul>

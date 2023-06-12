@@ -115,6 +115,7 @@ namespace ReceteX.Data.Migrations
                     MedulaPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isAdmin = table.Column<bool>(type: "bit", nullable: false),
                     isActive = table.Column<bool>(type: "bit", nullable: false),
+                    isRememberMe = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -225,10 +226,8 @@ namespace ReceteX.Data.Migrations
                     Dose1 = table.Column<int>(type: "int", nullable: false),
                     Dose2 = table.Column<int>(type: "int", nullable: false),
                     period = table.Column<int>(type: "int", nullable: false),
-                    MedicineUsagePeriodId = table.Column<int>(type: "int", nullable: false),
-                    MedicineUsagePeriodId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    MedicineUsageTypeId = table.Column<int>(type: "int", nullable: false),
-                    MedicineUsageTypeId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    MedicineUsagePeriodId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicineUsageTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -237,15 +236,17 @@ namespace ReceteX.Data.Migrations
                 {
                     table.PrimaryKey("PK_PrescriptionsMedicines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PrescriptionsMedicines_MedicineUsagePeriods_MedicineUsagePeriodId1",
-                        column: x => x.MedicineUsagePeriodId1,
+                        name: "FK_PrescriptionsMedicines_MedicineUsagePeriods_MedicineUsagePeriodId",
+                        column: x => x.MedicineUsagePeriodId,
                         principalTable: "MedicineUsagePeriods",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PrescriptionsMedicines_MedicineUsageTypes_MedicineUsageTypeId1",
-                        column: x => x.MedicineUsageTypeId1,
+                        name: "FK_PrescriptionsMedicines_MedicineUsageTypes_MedicineUsageTypeId",
+                        column: x => x.MedicineUsageTypeId,
                         principalTable: "MedicineUsageTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PrescriptionsMedicines_Medicines_MedicineId",
                         column: x => x.MedicineId,
@@ -291,14 +292,14 @@ namespace ReceteX.Data.Migrations
                 column: "MedicineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PrescriptionsMedicines_MedicineUsagePeriodId1",
+                name: "IX_PrescriptionsMedicines_MedicineUsagePeriodId",
                 table: "PrescriptionsMedicines",
-                column: "MedicineUsagePeriodId1");
+                column: "MedicineUsagePeriodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PrescriptionsMedicines_MedicineUsageTypeId1",
+                name: "IX_PrescriptionsMedicines_MedicineUsageTypeId",
                 table: "PrescriptionsMedicines",
-                column: "MedicineUsageTypeId1");
+                column: "MedicineUsageTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PrescriptionsMedicines_PrescriptionId",

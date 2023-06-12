@@ -13,9 +13,11 @@ namespace ReceteX.Repository.Shared.Abstract
 
 		IQueryable<T> GetAll();
 		IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);
+
+		T GetById(Guid id);
 		void Add(T entity);
 		void Update(T entity);
-		void Remove(T entity);
+		void Remove(Guid id);
 		void RemoveRange(IEnumerable<T> entities);
 		void AddRange(IEnumerable<T> entities);
 

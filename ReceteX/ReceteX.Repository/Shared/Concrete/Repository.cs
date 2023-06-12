@@ -44,13 +44,19 @@ namespace ReceteX.Repository.Shared.Concrete
 			return GetAll().Where(predicate);
 		}
 
+		public T GetById(Guid id)
+		{
+			return dbSet.Find(id);
+		}
+
 		public  virtual T  GetFirstOrDefault(Expression<Func<T, bool>> predicate)
 		{
 			return GetAll().FirstOrDefault(predicate);
 		}
 
-		public void Remove(T entity)
+		public void Remove(Guid  id)
 		{
+		  T entity=GetFirstOrDefault(t=>t.Id==id);	
 			entity.isDeleted = true;
 			
 

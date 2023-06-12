@@ -9,7 +9,7 @@ namespace ReceteX.Web.Controllers
 {
 	public class CustomerController : Controller
 	{
-		
+
 		private readonly IUnitOfWork unitOfWork;
 		public CustomerController(IUnitOfWork unitOfWork)
 		{
@@ -21,22 +21,30 @@ namespace ReceteX.Web.Controllers
 		{
 			return View();
 		}
-		
+
 		public IActionResult GetAll()
 		{
-			return Json(new { data = unitOfWork.Customers.GetAll() });
+			return Json(new { data = unitOfWork.Customers.GetAllWithUserCount() });
 
 		}
-
 		[HttpPost]
-		public IActionResult GetByID (Guid guid)
+		public IActionResult Delete(Guid id)
 		{
-			Customer cst = unitOfWork.Customers.GetFirstOrDefault(c => c.Id == guid);
 
-			return Json(cst);
+			unitOfWork.Customers.Remove(id);
+			unitOfWork.Save();
+			return Ok();
+
+		}
+
+		[HttpPost]
+		public IActionResult GetById(Guid id)
+		{
+			return Json(unitOfWork.Customers.GetById(id));
+			
 		}
 		[HttpPost]
-		public  IActionResult Create(Customer customer)
+		public IActionResult Create(Customer customer)
 		{
 			unitOfWork.Customers.Add(customer);
 			unitOfWork.Save();
@@ -45,9 +53,11 @@ namespace ReceteX.Web.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Update ( Customer customer)
+		public IActionResult Update(Customer customer)
 		{
-			unitOfWork.Customers.Update(customer);
+			Customer asil = unitOfWork.Customers.GetFirstOrDefault(c => c.Id == customer.Id);
+            asil.Name = customer.Name;
+			unitOfWork.Customers.Update(asil);
 			unitOfWork.Save();
 			return Ok();
 

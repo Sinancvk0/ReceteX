@@ -1,4 +1,5 @@
 ﻿using ReceteX.Models;
+using ReceteX.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ReceteX.Repository.Shared.Abstract
 	public interface IUnitOfWork
 	{
 		IRepository<AppUser> Users { get; }
-		IRepository<Customer> Customers { get; }
+		ICustomerRepository Customers { get; }
 		IRepository<Description> Descriptions { get; }
 		IRepository<DescriptionType> DescriptionTypes { get; }
 		IRepository<Diagnosis> Diagnoses { get; }

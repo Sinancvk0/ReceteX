@@ -1,5 +1,7 @@
 ﻿using ReceteX.Data;
 using ReceteX.Models;
+using ReceteX.Repository.Abstract;
+using ReceteX.Repository.Concrete;
 using ReceteX.Repository.Shared.Abstract;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace ReceteX.Repository.Shared.Concrete
 	{
 		public IRepository<AppUser> Users { get; private set; }
 
-		public IRepository<Customer> Customers { get; private set; }
+		public ICustomerRepository Customers { get; private set; }
 
 		public IRepository<Description> Descriptions { get; private set; }
 
@@ -40,7 +42,7 @@ namespace ReceteX.Repository.Shared.Concrete
 		{
 			_db = db;
 			Users = new Repository<AppUser>(db);
-			Customers = new Repository<Customer>(db);
+			Customers = new CustomerRepository(db);
 			Descriptions = new Repository<Description>(db);
 			DescriptionTypes = new Repository<DescriptionType>(db);
 			Diagnoses = new Repository<Diagnosis>(db);

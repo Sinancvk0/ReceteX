@@ -78,7 +78,7 @@ namespace ReceteX.Web.Controllers
 					List<Claim> claims = new List<Claim>();
 
 					//---------kullanıcının cookiesinde tuttuğumuz datalar.
-					claims.Add(new Claim(ClaimTypes.Name, usr.Name));
+					claims.Add(new Claim(ClaimTypes.Name, usr.Name +" "+usr.Surname ));
 					claims.Add(new Claim(ClaimTypes.NameIdentifier, usr.Id.ToString()));
 
 					//----------cookie
@@ -86,13 +86,16 @@ namespace ReceteX.Web.Controllers
 						claims.Add(new Claim(ClaimTypes.Role, "Admin"));
 					else
 						claims.Add(new Claim(ClaimTypes.Role, "User"));
+					
+					  
 
 					var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 					await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                  
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity),
+						new AuthenticationProperties { IsPersistent = usr.isRememberMe });
 
-					await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-					return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
 
 
 				}

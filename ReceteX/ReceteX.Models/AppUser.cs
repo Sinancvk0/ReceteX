@@ -23,7 +23,8 @@ namespace ReceteX.Models
 
 		public bool isAdmin { get; set; } = false;
 
-		public bool isActive { get; set; } = true;	
+		public bool isActive { get; set; } = true;
+		public bool isRememberMe { get; set; } = false; 
 
 
 	}
