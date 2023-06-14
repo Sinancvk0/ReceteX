@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReceteX.Models;
 using ReceteX.Repository.Shared.Abstract;
+using ReceteX.Utility;
 using System.Xml;
 
 namespace ReceteX.Web.Controllers
@@ -8,11 +9,14 @@ namespace ReceteX.Web.Controllers
 	public class MedicineController : Controller
 	{
 		private readonly IUnitOfWork unitOfWork;
+		private readonly XmlRetriever xmlRetriever;
 
-		public MedicineController(IUnitOfWork unitOfWork)
+		public MedicineController(IUnitOfWork unitOfWork, XmlRetriever xmlRetriever)
 		{
 			this.unitOfWork = unitOfWork;
+			this.xmlRetriever = xmlRetriever;
 		}
+
 
 		public async Task ParseAndSaveFromXml(string xmlContent)
 		{
@@ -31,11 +35,13 @@ namespace ReceteX.Web.Controllers
 			unitOfWork.Save();
 
 		}
-		public IActionResult UpdateMedicineList()
+		public async Task< IActionResult> UpdateMedicineList()
 		{
-
-			return RedirectToAction();
+		 string content= await xmlRetriever.GetXmlContent("https://www.iby.com.tr/exe/ilaclar.xml");
+			await ParseAndSaveFromXml(content);
+			return RedirectToAction("Index");
 		}
+		
 
 		public IActionResult Index()
 		{
