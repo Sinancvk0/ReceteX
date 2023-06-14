@@ -31,6 +31,11 @@ namespace ReceteX.Web.Controllers
 			unitOfWork.Save();
 
 		}
+		public IActionResult UpdateMedicineList()
+		{
+
+			return RedirectToAction();
+		}
 
 		public IActionResult Index()
 		{

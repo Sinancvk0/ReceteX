@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ReceteX.Data;
 using ReceteX.Repository.Shared.Abstract;
 using ReceteX.Repository.Shared.Concrete;
-
+using ReceteX.Utility;
 
 namespace ReceteX.Web
 {
@@ -33,6 +33,7 @@ namespace ReceteX.Web
 
 
 			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+			builder.Services.AddScoped<XmlRetriever>();
 
 			var app = builder.Build();
 

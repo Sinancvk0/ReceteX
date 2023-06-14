@@ -19,6 +19,7 @@
     <ProjectReference Include="..\ReceteX.Data\ReceteX.Data.csproj" />
     <ProjectReference Include="..\ReceteX.Models\ReceteX.Models.csproj" />
     <ProjectReference Include="..\ReceteX.Repository\ReceteX.Repository.csproj" />
+    <ProjectReference Include="..\ReceteX.Utility\ReceteX.Utility.csproj" />
   </ItemGroup>
 
 </Project>
