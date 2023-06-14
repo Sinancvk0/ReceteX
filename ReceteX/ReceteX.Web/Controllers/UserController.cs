@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReceteX.Models;
 using ReceteX.Repository.Shared.Abstract;
 using System.Security.Claims;
@@ -24,17 +25,36 @@ namespace ReceteX.Web.Controllers
 
 		// Admin olarak girildiğinde tüm userları listeleyeceğimiz action
 		[Authorize(Roles = "Admin")]
-		public IActionResult GetAll()
+		[HttpGet]
+		public IActionResult GetAll([FromQuery(Name = "customerId")]string? customerId)
 		{
-			//DataTables oluşabilmek için verilerin hepsinin DATA isimli bir obje içinde gelme kuralı koyuyor. O yuzden aşağıdaki gibi yeni bir anonim nesne oluşturup içerisine data diye bir field açıyoruz ve bütün datayı onun içine koyuyoruz. Bunu sırf DataTables için yapıyoruz.
-			return Json(new { data = unitOfWork.Users.GetAll() });
+
+			if (customerId==null)
+			{
+				//DataTables oluşabilmek için verilerin hepsinin DATA isimli bir obje içinde gelme kuralı koyuyor. O yuzden aşağıdaki gibi yeni bir anonim nesne oluşturup içerisine data diye bir field açıyoruz ve bütün datayı onun içine koyuyoruz. Bunu sırf DataTables için yapıyoruz.
+				return Json(new { data = unitOfWork.Users.GetAll().Include(u => u.Customer) });
+				//return Json(new { data = unitOfWork.Users.GetAll().Include(u => u.Customer) });
+
+
+			}
+			else
+			{
+				return Json(new { data = unitOfWork.Users.GetAll(u=>u.CustomerId==Guid.Parse(customerId)).Include(u => u.Customer) });
+
+			}
+
+
+
+
 		}
+
+
 
 		[Authorize(Roles = "Admin")]
 		[HttpPost]
-		public IActionResult GetById(Guid guid)
+		public IActionResult GetById(Guid id)
 		{
-			AppUser usr = unitOfWork.Users.GetFirstOrDefault(u => u.Id == guid);
+			AppUser usr = unitOfWork.Users.GetFirstOrDefault(u => u.Id == id);
 			return Json(usr);
 		}
 
@@ -51,6 +71,13 @@ namespace ReceteX.Web.Controllers
 		[HttpPost]
 		public IActionResult Update(AppUser appUser)
 		{
+			AppUser asil = unitOfWork.Users.GetFirstOrDefault(u => u.Id == appUser.Id);
+
+			appUser.Password = asil.Password;
+			appUser.PinCOde = asil.PinCOde;
+			appUser.MedulaPassword = asil.MedulaPassword;
+			appUser.DateCreated = asil.DateCreated;
+
 			unitOfWork.Users.Update(appUser);
 			unitOfWork.Save();
 			return Ok();
@@ -108,6 +135,26 @@ namespace ReceteX.Web.Controllers
 			{
 				return View();
 			}
+
+
+		}
+
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
+		public IActionResult UserChangeState(Guid id)
+		{
+			AppUser asil = unitOfWork.Users.GetById(id); if (asil.isActive)
+			{
+				asil.isActive = false;
+				unitOfWork.Users.Update(asil); unitOfWork.Save();
+				return Ok();
+			}
+			else
+			{
+				asil.isActive = true; unitOfWork.Users.Update(asil);
+				unitOfWork.Save(); return Ok();
+			}
 		}
 	}
+
 }

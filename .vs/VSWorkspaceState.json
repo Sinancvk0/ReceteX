@@ -3,10 +3,14 @@
     "",
     "\\ReceteX",
     "\\ReceteX\\ReceteX.Data",
+    "\\ReceteX\\ReceteX.Repository",
+    "\\ReceteX\\ReceteX.Repository\\Shared",
+    "\\ReceteX\\ReceteX.Repository\\Shared\\Concrete",
     "\\ReceteX\\ReceteX.Web",
+    "\\ReceteX\\ReceteX.Web\\Controllers",
     "\\ReceteX\\ReceteX.Web\\Views",
     "\\ReceteX\\ReceteX.Web\\Views\\Customer"
   ],
-  "SelectedNode": "\\ReceteX\\ReceteX.Web\\Views\\Customer\\Index.cshtml",
+  "SelectedNode": "\\ReceteX\\ReceteX.Repository\\Shared\\Concrete\\Repository.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -48,10 +48,9 @@ namespace ReceteX.Repository.Shared.Concrete
 		{
 			return dbSet.Find(id);
 		}
-
-		public  virtual T  GetFirstOrDefault(Expression<Func<T, bool>> predicate)
+		public virtual T GetFirstOrDefault(Expression<Func<T, bool>> filter)
 		{
-			return GetAll().FirstOrDefault(predicate);
+			return dbSet.Where(t => t.isDeleted == false).AsNoTracking().FirstOrDefault(filter);
 		}
 
 		public void Remove(Guid  id)

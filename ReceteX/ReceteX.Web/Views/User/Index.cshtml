@@ -1,9 +1,11 @@
-﻿
-<div>
+﻿<div>
 	<div class="card">
 		<div class="card-header  text-white bg-success bg-gradient">
 			<span class="fs-4">Kullanıcı Listesi</span>
-			<a href="#" id="btnEkle" class="btn btn-warning ms-2">Kullanıcı Ekle</a>
+			@if (User.IsInRole("Admin"))
+			{
+				<a href="#" id="btnEkle" class="btn btn-warning ms-2">Kullanıcı Ekle</a>
+			}
 		</div>
 		<div class="card-body">
 			<table id="tblUsers" class="table table-bordered table-striped" style="width:100%">
@@ -13,154 +15,313 @@
 		</div>
 	</div>
 </div>
-@*----------------------------------------   MODAL BAŞLANGIÇ ---------------------------------*@
 
-<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-	 aria-labelledby="modalTitleId" aria-hidden="true">
+@*----------------------- USER MODAL ---------------------------*@
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modalTitle">Kullanıcı Ekle </h5>
+				<h5 class="modal-title" id="modalTitleId"> Kullanıcı Ekle </h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<div class="container">
 					<div class="mb-3">
-						<label class="form-label">İsim</label>
-						<input type="text" id="txtName" class="form-control" />
-					</div>
-					<div class="mb-3">
-						<label class="form-label">Soyİsim</label>
-						<input type="text" id="txtSurName" class="form-control" />
-					</div>
-					<div class="mb-3">
-						<label class="form-label">TCKN</label>
-						<input type="text" id="txtTC" class="form-control" />
-					</div>
-					<div class="mb-3">
-						<label class="form-label">GSM</label>
-						<input type="text" id="txtGSM" class="form-control" />
-					</div>
-
-					<div class="mb-3">
 						<label class="form-label">Email</label>
-						<input type="text" id="txtEmail" class="form-control" />
+						<input type="text" id="txtEmail" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Ad</label>
+						<input type="text" id="txtName" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Soyad</label>
+						<input type="text" id="txtSurname" class="form-control txt">
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Şifre</label>
-						<input type="text" id="txtPassword" class="form-control" />
+						<input type="password" id="txtPassword" class="form-control txt">
 					</div>
 					<div class="mb-3">
-						<label class="form-label">Medula Kod</label>
-						<input type="text" id="txtMedulaCode" class="form-control" />
+						<label class="form-label">Müşteri Adı</label>
+						<select id="ddlCustomer" class="form-control select2 txt"></select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">GSM</label>
+						<input type="text" id="txtGsm" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">TCKN</label>
+						<input type="text" id="txtTckn" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Şehir Kodu</label>
+						<input type="text" id="txtCity" class="form-control txt">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Medula Şifre</label>
+						<input type="password" id="txtMedulaPassword" class="form-control txt">
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Pin Kodu</label>
-						<input type="text" id="txtPinCode" class="form-control" />
+						<input type="text" id="txtPinCode" class="form-control txt">
 					</div>
 					<div class="mb-3">
-						<label class="form-label">Şehir Kod</label>
-						<input type="text" id="txtCityCode" class="form-control" />
+						<label for="Authorization" class="form-label">Yetki</label><br />
+
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+							<input type="radio" class="btn-check" name="Authorization" value="True" id="btnradioAdmin1" autocomplete="off" checked>
+							<label class="btn btn-outline-info" for="btnradioAdmin1">Admin</label>
+
+							<input type="radio" class="btn-check" name="Authorization" value="False" id="btnradioAdmin2" autocomplete="off">
+							<label class="btn btn-outline-success" for="btnradioAdmin2">User</label>
+						</div>
 					</div>
-				
-					@if (User.IsInRole("Admin"))
-					{
-							<label for="Authorization" class="form-label">Yetki</label>
-
-							<br />
-
-							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-								<input type="radio" class="btn-check" name="Authorization" value="Admin" id="btnradio1" autocomplete="off" checked>
-								<label class="btn btn-outline-danger" for="btnradio1">Admin</label>
-
-								<input type="radio" class="btn-check" name="Authorization" value="User" id="btnradio2" autocomplete="off">
-								<label class="btn btn-outline-success" for="btnradio2">User</label>
-							</div>
-					}
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<a href="#" id="btnSave" class="btn btn-primary">Kaydet</a>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+				<a href="#" id="btnSave" class="btn btn-primary">Ekle</a>
 			</div>
 		</div>
 	</div>
 </div>
 
 
-
 @section Scripts{
-		<script>
-			var DataTable;
-			$(document).ready(function () {
+	<script>
+		var DataTable;
+		$(document).ready(function () {
 
-				//DataTable GetAll Bölümü
-				DataTable = $('#tblUsers').DataTable({
-					ajax: '/User/GetAll',
-					columns: [
-						{ data: 'id', title: "Id" },
-						{data: 'customerId',title:"CustomerId" },
-						{ data: 'name', title: "Name" },
-						{ data: 'surname', title: "SurName" },
-						{ data: 'gsm', title: "GSM" },
-						{ data: 'tckn', title: "TCKN" },
-						{ data: 'email', title: "Email" },
-					]
-				});
-				//Ekle Create Bölümü 
+			fillDataTable();
 
-				$("#btnEkle").click(function () {
-					$("#modalTitle").text("Kullanıcı Ekle");
-					$("#btnSave").text("Kaydet").removeClass('btn-success').addClass('btn-primary');
-					$("#modal").modal('show');
-
-					$('#btnSave').off();
-					$('#btnSave').click(function () {
-						let user = {
-							name: $("#txtName").val(),
-							surName: $("#txtSurName").val(),
-							tckn: $("#txtTC").val(),
-							gsm: $("#txtGSM").val(),
-							email: $("#txtEmail").val(),
-							password: $("#txtPassword").val(),
-							medulaPassword: $("#txtMedulaCode").val(),
-							pinCode: $("#txtPinCode").val(),
-							cityCode: $("#txtCityCode").val(),
-							isAdmin: function () { return ($("input[name='Authorization']:checked").val() == "Admin"); }
-						};
-
-						console.log(user.isAdmin);
-						$.ajax({
-							type: "POST",
-							url: "/User/Create",
-							data: user,
-							success: function (res) {
-								$("#modal").modal("hide");
-								toastr.success("Kullanıcı Eklendi");
-								$("#txtName").val('');
-								$("#txtSurName").val('');
-								$("#txtTC").val('');
-								$("#txtGSM").val('');
-								$("#txtEmail").val('');
-								$("#txtPassword").val('');
-								$("#txtMedulaCode").val('');
-								$("#txtPinCode").val('');
-								$("#txtCityCode").val('');
-								DataTable.ajax.reload();
-							},
-							error: function () {
-								$("#modal").modal("hide");
-								toastr.error("Kullanıcı Eklenemedi!!");
-							}
-						});
-					});
-
-                   // Silme Remove Alanı
-
-				 
-
-
+			$("#btnEkle").click(function () {
+				$('#modalTitleId').text("Kullanıcı Ekle");
+				$('.txt').val('');
+				$("#btnSave").text("Kaydet").removeClass('btn-success').addClass('btn-primary');
+				$("#btnSave").off();
+				$('.select2').select2({ width: '100%', dropdownParent: $('#modal') });
+				fillDdlCustomer();
+				$('#modal').modal("show");
+				$('#btnSave').click(function(){
+					addUser();
 				});
 			});
-		</script>
-} 
+		});
+
+		function editUser(id) {
+			$('#modalTitleId').text('Kullanıcı Düzenle');
+			$("#btnSave").text("Güncelle").removeClass('btn-primary').addClass('btn-success');
+			$('.txt').val('');
+			$('#btnSave').off();
+			$.ajax({
+				type: 'POST',
+				url: '/User/GetById',
+				data: { id: id },
+				success: function (res) {
+					$('#txtName').val(res.name);
+					$('#txtEmail').val(res.email);
+					$('#txtSurname').val(res.surname);
+					$('#txtTckn').val(res.tckn);
+					$('#txtGsm').val(res.gsm);
+					$('#txtCity').val(res.cityCode);
+					$('#txtPassword').val(res.password);
+					$('#txtMedulaPassword').val(res.medulaPassword);
+					$('#txtPinCode').val(res.pinCode);
+					if (res.isAdmin) {
+						$('#btnradioAdmin1').prop('checked', true);
+					}
+					else {
+						$('#btnradioAdmin2').prop('checked', true);
+					}
+					fillDdlCustomer();
+
+					$(document).ajaxStop(function () {
+						$(this).off("ajaxStop");
+						$("#ddlCustomer").val(res.customerID).trigger('change');
+						$('.select2').select2({ width: '100%', dropdownParent: $('#modal') });
+						$('#modal').modal('show');
+					});
+				}
+			});
+
+			$('#btnSave').click(function(){
+				let usr = {
+					id:id,
+					name:$('#txtName').val(),
+					email:$('#txtEmail').val(),
+					surname:$('#txtSurname').val(),
+					tckn:$('#txtTckn').val(),
+					gsm:$('#txtGsm').val(),
+					cityCode: $('#txtCity').val(),
+					customerID: $('#ddlCustomer option:selected').val(),
+					medulaPassword: $('#txtMedulaPassword').val(),
+					password: $('#txtPassword').val(),
+					pinCode: $('#txtPinCode').val(),
+					isAdmin: $("input[name='Authorization']:checked").val(),
+					isActive: $("input[name='Active']:checked").val()
+				}
+
+				$.ajax({
+					type:'POST',
+					url:'/User/Update',
+					data: usr,
+					success: function(){
+						toastr.success("Kullanıcı bilgileri başarıyla güncellendi.");
+						$('#modal').modal('hide');
+						DataTable.ajax.reload();
+					}
+				});
+			});
+		}
+
+
+
+		function deleteUser(id) {
+			Swal.fire({
+				title: 'Silmek istediğinize emin misiniz?',
+				text: "Kullanıcı Silinecek",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sil!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: 'POST',
+						url: '/User/Remove',
+						data: { id: id },
+						success: function () {
+							Swal.fire(
+								'Başarılı!',
+								'Kullanıcı Silindi',
+								'success'
+							);
+							DataTable.ajax.reload();
+						},
+						error: function () {
+							Swal.fire({
+								icon: 'error',
+								title: 'Kullanıcı Silme İşlemi Başarısız!',
+								text: 'Bir şeyler yanlış gitti!'
+							});
+						}
+					});
+				}
+			});
+		}
+
+		function fillDataTable() {
+			DataTable = $('#tblUsers').DataTable({
+				ajax: '/User/GetAll?customerId=@Context.Request.Query["customerId"]',
+				columns: [
+					{ data: 'id', title: "Id" },
+					{ data: 'email', title: "Email" },
+					{ data: 'name', title: "Ad" },
+					{ data: 'surname', title: "Soyad" },
+					{ data: 'customer.name', title: "Müşteri Adı" },
+					{ data: 'gsm', title: "Telefon" },
+					{ data: 'tckn', title: "TCKN" },
+					{ data: 'cityCode', title:'Şehir Kodu' },
+					{
+						data: 'isActive', className: "text-center", title: 'Durum', render: function (data, type, row)
+						//{return data = (data) ? 'Aktif' : 'Pasif';}
+						{
+							if(data)
+							{
+								return `<a class="btn btn-sm btn-success px-3" onclick="userChangeState('${row.id}')">Aktif</a>`
+							}
+							else
+								return `<a class="btn btn-sm btn-dark px-3" onclick="userChangeState('${row.id}')">Pasif</a>`
+						}
+					},
+					{
+						data: 'id', className: "text-center", title: 'İşlemler', render: function (data) {
+							return ` <a href="#" onclick="deleteUser('${data}')" class="btn btn-sm btn-danger"><i class="dripicons-trash"></i></a>
+									<a href="#" onclick="editUser('${data}')" class="btn btn-sm btn-primary"><i class="dripicons-document-edit"></i></a> `
+						}
+					}
+				]
+			});
+		}
+		function userChangeState(userId)
+		{
+			Swal.fire({
+				title: 'Kullancının Durumunu Değiştirmek İstediğinize Emin Misiniz?',
+				text: "Kullanıcı durumu değişecek",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Değiştir!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: 'POST',
+						url: '/User/UserChangeState',
+						data: { id: userId },
+						success: function () {
+							Swal.fire(
+								'Başarılı!',
+								'Durum Değişti',
+								'success'
+							);
+							DataTable.ajax.reload();
+						},
+						error: function () {
+							Swal.fire({
+								icon: 'error',
+								title: 'Durum DEğiştirme İşlemi Başarısız!',
+								text: 'Bir şeyler yanlış gitti!'
+							});
+						}
+					});
+				}
+			});
+		}
+
+		function addUser() {
+			let user = {
+				email: $('#txtEmail').val(),
+				name: $('#txtName').val(),
+				surname: $('#txtSurname').val(),
+				customerId: $('#ddlCustomer option:selected').val(),
+				gsm: $('#txtGsm').val(),
+				tckn: $('#txtTckn').val(),
+				medulaPassword: $('#txtMedulaPassword').val(),
+				password: $('#txtPassword').val(),
+				pinCode: $('#txtPinCode').val(),
+				cityCode: $('#txtCity').val(),
+				isAdmin: $("input[name='Authorization']:checked").val(),
+				isActive: $("input[name='Active']:checked").val()
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: '/User/Create',
+				data: user,
+				success: function () {
+					$('#modal').modal('hide');
+					toastr.success('Kullanıcı Başarıyle Eklendi!');
+					DataTable.ajax.reload();
+
+				}
+			});
+		}
+
+		function fillDdlCustomer() {
+			$.ajax({
+				type: 'GET',
+				url: '/Customer/GetAll',
+				success: function (res) {
+					$('#ddlCustomer').empty();
+					for (var item of res.data){
+						$('#ddlCustomer').append(new Option(item.name, item.id, false, false));
+					}
+				}
+			})
+		}
+
+	</script>
+}

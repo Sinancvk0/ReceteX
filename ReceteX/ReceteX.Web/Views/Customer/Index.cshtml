@@ -99,7 +99,11 @@
 				columns: [
 					{ data: 'id', title: "Id", width: '400px' },
 					{ data: 'name', title: "Ad" },
-					{data:'totalUsers',title:"Kullanıcı Sayısı"},
+					{data:'totalUsers',title:"Kullanıcı Sayısı",render: function(data,type,row){
+					
+					return `<a href="/User?customerId=${row.id}" class="btn btn-sm btn-success">${data}</a>`
+					
+					}},
 					{
 						data: 'id', title: 'İşlemler', render: function (data) {
 							return ` <a href="#" onclick="deleteCustomer('${data}')" class="btn btn-sm btn-danger">Sil</a>
