@@ -9,6 +9,7 @@ namespace ReceteX.Models
 	public class Diagnosis:BaseModel
 	{
 		public string? Code { get; set; }	
+		public ICollection<Prescription> Prescription { get; set; } 
 
 	}
 }

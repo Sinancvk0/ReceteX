@@ -13,7 +13,8 @@
           "Microsoft.EntityFrameworkCore.Tools": "7.0.5",
           "ReceteX.Data": "1.0.0",
           "ReceteX.Models": "1.0.0",
-          "ReceteX.Repository": "1.0.0"
+          "ReceteX.Repository": "1.0.0",
+          "ReceteX.Utility": "1.0.0"
         },
         "runtime": {
           "ReceteX.Web.dll": {}
@@ -765,6 +766,11 @@
         "runtime": {
           "ReceteX.Repository.dll": {}
         }
+      },
+      "ReceteX.Utility/1.0.0": {
+        "runtime": {
+          "ReceteX.Utility.dll": {}
+        }
       }
     }
   },
@@ -1331,6 +1337,11 @@
       "sha512": ""
     },
     "ReceteX.Repository/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ReceteX.Utility/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

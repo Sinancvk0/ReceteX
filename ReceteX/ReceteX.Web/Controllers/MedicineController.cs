@@ -37,7 +37,7 @@ namespace ReceteX.Web.Controllers
 		}
 		public async Task< IActionResult> UpdateMedicineList()
 		{
-		 string content= await xmlRetriever.GetXmlContent("https://www.iby.com.tr/exe/ilaclar.xml");
+		 string content= await xmlRetriever.GetXmlContent("https://www.ibys.com.tr/exe/ilaclar.xml");
 			await ParseAndSaveFromXml(content);
 			return RedirectToAction("Index");
 		}
