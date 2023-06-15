@@ -31,6 +31,7 @@ namespace ReceteX.Web.Controllers
 				dia.Code = diagnosis.SelectSingleNode("kod").InnerText;
 
 				dia.Name = diagnosis.SelectSingleNode("ad").InnerText;
+
 				unitOfWork.Diagnoses.Add(dia);
 			}
 

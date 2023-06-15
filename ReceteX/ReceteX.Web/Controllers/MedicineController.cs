@@ -18,23 +18,52 @@ namespace ReceteX.Web.Controllers
 		}
 
 
+		public IActionResult GetALl()
+		{
+
+			return Json(new { data = unitOfWork.Medicines.GetAll() });
+
+
+		}
+
+
 		public async Task ParseAndSaveFromXml(string xmlContent)
 		{
 			XmlDocument xmlDoc = new XmlDocument();
+
 			xmlDoc.LoadXml(xmlContent);
-			XmlNodeList medicines = xmlDoc.SelectNodes("ilaclar/ilac");
-			
-			foreach (XmlNode medicine in medicines )
+
+			XmlNodeList medicines = xmlDoc.SelectNodes("/ilaclar/ilac");
+
+			IQueryable<Medicine> medicinesFromDb = unitOfWork.Medicines.GetAll().OrderBy(m=>m.Name).ToList().AsQueryable<Medicine>();
+			List<Medicine> push = new List<Medicine>();
+
+
+			foreach (XmlNode medicine in medicines)
 			{
-				Medicine med = new Medicine();
-				med.Name = medicine.SelectSingleNode("ad").InnerText;
-				med.Barcode = medicine.SelectSingleNode("barkod").InnerText;
+				string barcode = medicine.SelectSingleNode("barkod").InnerText;
 
-				unitOfWork.Medicines.Add(med);
+			
+				//Yeni Kayıtları aktaran Döngümüz
+
+				if (!medicinesFromDb.Any(m => m.Barcode == barcode))
+				{
+					Medicine med = new Medicine();
+					med.Name = medicine.SelectSingleNode("ad").InnerText;
+					med.Barcode = medicine.SelectSingleNode("barkod").InnerText;
+
+					unitOfWork.Medicines.Add(med);
+				}
+				
+
 			}
+		
 			unitOfWork.Save();
-
 		}
+
+
+
+
 		public async Task< IActionResult> UpdateMedicineList()
 		{
 		 string content= await xmlRetriever.GetXmlContent("https://www.ibys.com.tr/exe/ilaclar.xml");

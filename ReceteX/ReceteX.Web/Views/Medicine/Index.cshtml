@@ -9,10 +9,44 @@
 		<div class="card-body">
 			<table id="tblMedicines" class="table table-bordered table-striped" style="width:100%">
 				<thead>
+						<tr>
+						<th>Guid</th>
+						<th>Barcode</th>
+						<th>Name</th>
+				
+					</tr>
 				</thead>
 			</table>
 		</div>
 	</div>
 </div>
 
+@section Scripts{
+
+	<script>
+
+		var DataTable;
+
+		DataTable=$('#tblMedicines').DataTable({
+
+
+			ajax:'/Medicine/GetAll',
+			columns:[
+				{data:'id'},
+				{data:'barcode'},
+				{data:'name'}
+
+
+			]
+
+		})
+
+
+
+
+
+	</script>
+
+
+}
 
