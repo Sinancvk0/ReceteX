@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReceteX.Models;
 using ReceteX.Repository.Shared.Abstract;
+using System.Security.Claims;
 
 namespace ReceteX.Web.Controllers
 {
@@ -9,36 +11,53 @@ namespace ReceteX.Web.Controllers
 	public class PrescriptionController : Controller
 	{
 		private readonly IUnitOfWork unitOfWork;
+
 		public PrescriptionController(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
 		}
 
-		[HttpGet]
-		[Route("Receteyaz/{id?}")]
-		public IActionResult Write(string id)
+
+		public IActionResult Index()
 		{
-			Prescription prescription = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == Guid.Parse(id));
+			Prescription prescription = new Prescription();
+			prescription.StatusId = unitOfWork.Statuses.GetFirstOrDefault(s => s.Name == "Taslak").Id;
+			prescription.AppUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+			unitOfWork.Prescriptions.Add(prescription);
+			unitOfWork.Save();
 			return View(prescription);
+
+
 		}
+
 
 		[HttpPost]
 		public IActionResult Create(Prescription prescription)
 		{
 			unitOfWork.Prescriptions.Add(prescription);
 			unitOfWork.Save();
+
 			return Json(prescription);
 		}
 
 		[HttpPost]
 		public IActionResult AddDiagnosis(Guid prescriptionId, Guid diagnosisId)
 		{
-			Prescription asil = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == prescriptionId);
+			Prescription asil = unitOfWork.Prescriptions.GetAll(p => p.Id == prescriptionId).Include(p => p.Diagnoses).First();
 			Diagnosis asilDiagnosis = unitOfWork.Diagnoses.GetFirstOrDefault(d => d.Id == diagnosisId);
+
 			asil.Diagnoses.Add(asilDiagnosis);
 			unitOfWork.Prescriptions.Update(asil);
 			unitOfWork.Save();
+
 			return Ok();
+
+		}
+
+		[HttpPost]
+		public IActionResult GetDiagnoses(Guid prescriptionId)
+		{
+			return Json(unitOfWork.Prescriptions.GetAll(p => p.Id == prescriptionId).Include(p => p.Diagnoses));
 
 		}
 
@@ -48,10 +67,10 @@ namespace ReceteX.Web.Controllers
 			Prescription asil = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == prescriptionId);
 			asil.Descriptions.Add(description);
 			unitOfWork.Prescriptions.Update(asil);
-
 			unitOfWork.Save();
 			return Ok();
 		}
+
 		[HttpPost]
 		public IActionResult AddMedicine(Guid prescriptionId, PrescriptionsMedicine prescriptionMedicine)
 		{
@@ -66,9 +85,11 @@ namespace ReceteX.Web.Controllers
 		[HttpPost]
 		public IActionResult RemoveMedicine(Guid prescriptionId, Guid prescriptionMedicineId)
 		{
+
 			Prescription asil = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == prescriptionId);
 
 			asil.PrescriptionMedicines.Remove(asil.PrescriptionMedicines.FirstOrDefault(pm => pm.Id == prescriptionMedicineId));
+
 			unitOfWork.Prescriptions.Update(asil);
 			unitOfWork.Save();
 			return Ok();
@@ -80,21 +101,26 @@ namespace ReceteX.Web.Controllers
 		{
 			Prescription asil = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == prescriptionId);
 			asil.Descriptions.Remove(asil.Descriptions.FirstOrDefault(d => d.Id == descriptionId));
+
 			unitOfWork.Prescriptions.Update(asil);
 			unitOfWork.Save();
 			return Ok();
+
 		}
+
 		[HttpPost]
 		public IActionResult RemoveDiagnosis(Guid prescriptionId, Guid diagnosisId)
 		{
 			Prescription asil = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == prescriptionId);
 			asil.Diagnoses.Remove(asil.Diagnoses.FirstOrDefault(d => d.Id == diagnosisId));
+
 			unitOfWork.Prescriptions.Update(asil);
 			unitOfWork.Save();
 			return Ok();
 
 		}
 
-		
+
+
 	}
 }

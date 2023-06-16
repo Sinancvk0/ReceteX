@@ -1,0 +1,108 @@
+﻿﻿@using ReceteX.Models;
+@model Prescription
+
+@section Styles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <style>
+        .ui-autocomplete-loading {
+            background: white url("/assets/images/loading.gif") center center no-repeat;
+        }
+
+        .ui-autocomplete .ui-menu-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+            .ui-autocomplete .ui-menu-item:hover {
+                background-color: #f0f0f0;
+            }
+
+        .ui-autocomplete .ui-state-active {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+}
+
+<div>
+    <div class="card">
+        <div class="card-header  text-white bg-success bg-gradient text-center">
+            <span class="fs-6">Tanı Ekleme Bölümü</span>
+        </div>
+        <div class="card-body">
+            <div class="ui-widget">
+                <input type="text" id="diagnosis" name="diagnosis" class="form-control text-center" placeholder="Tanı adının veya kodunun en az ilk 3 harfini yazınız, sonra listeden seçiniz..." />
+                <input type="hidden" id="diagnosisId" name="diagnosisId" />
+            </div>
+            <div id="divDiagnoses" class="text-md-center mt-3"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script>
+        function fillDiagnoses()
+        {
+            $.ajax({
+                type:'POST',
+                url: '@Url.Action("GetDiagnoses", "Prescription")',
+                data:{prescriptionId:'@Model.Id'},
+                success:function(res){
+                    $("#divDiagnoses").empty();
+                    for(var diagnose of res[0].diagnoses)
+                    $("#divDiagnoses").append(`<div>${diagnose.name}</div>`);
+                }
+            });
+        }
+        function addDiagnosis(diagnosisId) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddDiagnosis", "Prescription")',
+                data: { prescriptionId: '@Model.Id', diagnosisId: diagnosisId },
+                success: function (res) {
+                    fillDiagnoses();
+                }
+            });
+        }
+
+        $(function () {
+
+
+
+
+            $("#diagnosis").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchDiagnosis", "Diagnosis")',
+                        data: { searchTerm: request.term },
+                        dataType: "json",
+                        type: "GET",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 3,
+                select: function (event, ui) {
+                    $("#diagnosis").val('');
+                    $("#diagnosisId").val(ui.item.value);
+                    addDiagnosis(ui.item.value);
+                    return false;
+                }
+            });
+        });
+    </script>
+
+
+}

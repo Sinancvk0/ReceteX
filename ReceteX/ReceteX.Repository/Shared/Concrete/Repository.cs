@@ -43,6 +43,14 @@ namespace ReceteX.Repository.Shared.Concrete
 		{
 			return GetAll().Where(predicate);
 		}
+		public virtual IQueryable<T> GetAllDeleted(Expression<Func<T, bool>> predicate)
+		{
+			return dbSet.Where (t=>t.isDeleted==true).Where(predicate);
+		}
+		public virtual IQueryable<T> GetAllDeleted()
+		{
+			return dbSet.Where(x => x.isDeleted == true);
+		}
 
 		public T GetById(Guid id)
 		{
