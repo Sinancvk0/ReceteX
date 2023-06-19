@@ -3,242 +3,256 @@
 <html lang="en">
 <head>
 
-    <meta charset="utf-8" />
-    <title>ReceteX | .NET </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+	<meta charset="utf-8" />
+	<title>Reçete X</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+	<meta content="Themesbrand" name="author" />
+	<!-- App favicon -->
+	<link rel="shortcut icon" href="~/assets/images/favicon.ico">
 
-    <!-- Bootstrap Css -->
-    <link href="~/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <!-- Icons C~/ss -->
-    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css~/-->
-    <link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-    <!-- Option 1: Include in HTML -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <!-- SweetAlert Css -->
-    <link href="~/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @await RenderSectionAsync("Styles",false);
+
+
+
+	<!-- Bootstrap Css -->
+	<link href="~/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+	<!-- Icons C~/ss -->
+	<link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+	<!-- App Css~/-->
+	<link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+	<link href="~/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+	<!-- Option 1: Include in HTML -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	<!-- SweetAlert Css -->
+	<link href="~/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="~/assets/libs/toastr/build/toastr.min.css">
+
+	<link href="~/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+	@await RenderSectionAsync("Styles",false);
 </head>
 
 
 <body>
-    <!-- <body data-layout="horizontal" data-topbar="colored"> -->
-    <!-- Begin page -->
-    <div id="layout-wrapper">
-        <header id="page-topbar">
-            <div class="navbar-header">
-                <div class="d-flex">
-                    <!-- LOGO -->
-                    <div class="navbar-brand-box">
-                        <a asp-controller="Home" asp-action="Index" class="logo logo-dark">
-                            <span class="logo-sm">
-                                <img src="~/assets/images/logo-sm.png" alt="" height="22">
-                            </span>
-                            <span class="logo-lg">
-                                <img src="~/assets/images/logo-dark.png" alt="" height="20">
-                            </span>
-                        </a>
-                        <a asp-controller="Home" asp-action="Index" class="logo logo-light">
-                            <span class="logo-sm">
-                                <img src="~/assets/images/logo-sm.png" alt="" height="22">
-                            </span>
-                            <span class="logo-lg">
-                                <img src="~/assets/images/logo-light.png" alt="" height="20">
-                            </span>
-                        </a>
-                    </div>
+	<div id="layout-wrapper">
+		<header id="page-topbar">
+			<div class="navbar-header">
+				<div class="d-flex">
+					<!-- LOGO -->
+					<div class="navbar-brand-box">
+						<a asp-controller="Home" asp-action="Index" class="logo logo-dark">
+							<span class="logo-sm">
+								<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+							</span>
+							<span class="logo-lg">
+								<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+							</span>
+						</a>
+						<a asp-controller="Home" asp-action="Index" class="logo logo-light">
+							<span class="logo-sm">
+								<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+							</span>
+							<span class="logo-lg">
+								<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+							</span>
+						</a>
+					</div>
 
-                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
-                        <i class="fa fa-fw fa-bars"></i>
-                    </button>
+					<button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+						<i class="fa fa-fw fa-bars"></i>
+					</button>
 
-                    <!-- App Search-->
-                    <form class="app-search d-none d-lg-block">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="uil-search"></span>
-                        </div>
-                    </form>
-                </div>
+					<!-- App Search-->
+					<form class="app-search d-none d-lg-block">
+						<div class="position-relative">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="uil-search"></span>
+						</div>
+					</form>
+				</div>
 
-                <div class="d-flex">
+				<div class="d-flex">
 
-                    <div class="dropdown d-inline-block d-lg-none ms-2">
-                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="uil-search"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                             aria-labelledby="page-header-search-dropdown">
+					<div class="dropdown d-inline-block d-lg-none ms-2">
+						<button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="uil-search"></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+							 aria-labelledby="page-header-search-dropdown">
 
-                            <form class="p-3">
-                                <div class="m-0">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+							<form class="p-3">
+								<div class="m-0">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+										<div class="input-group-append">
+											<button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 
-                    <div class="dropdown d-none d-lg-inline-block ms-1">
-                        <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                            <i class="uil-minus-path"></i>
-                        </button>
-                    </div>
+					<div class="dropdown d-none d-lg-inline-block ms-1">
+						<button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+							<i class="uil-minus-path"></i>
+						</button>
+					</div>
 
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="~/assets/images/users/avatar-4.jpg"
-                                 alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">@User.FindFirstValue(ClaimTypes.Name)</span>
-                            <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" asp-controller="User" asp-action="Logout"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Çıkış Yap</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- ========== Left Sidebar Start ========== -->
-        <div class="vertical-menu">
-            <!-- LOGO -->
-            <div class="navbar-brand-box">
-                <a asp-controller="Home" asp-action="Index" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="~/assets/images/logo-sm.png" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="~/assets/images/logo-dark.png" alt="" height="20">
-                    </span>
-                </a>
+					<div class="dropdown d-inline-block">
+						<button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img class="rounded-circle header-profile-user" src="~/assets/images/users/avatar-4.jpg"
+		 alt="Header Avatar">
+							<span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">@User.FindFirstValue(ClaimTypes.Name)</span>
+							<i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-end">
+							<a class="dropdown-item" asp-controller="User" asp-action="Logout"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Çıkış Yap</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- ========== Left Sidebar Start ========== -->
+		<div class="vertical-menu">
+			<!-- LOGO -->
+			<div class="navbar-brand-box">
+				<a asp-controller="Home" asp-action="Index" class="logo logo-dark">
+					<span class="logo-sm">
+						<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+					</span>
+					<span class="logo-lg">
+						<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+					</span>
+				</a>
 
-                <a asp-controller="Home" asp-action="Index" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="~/assets/images/logo-sm.png" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="~/assets/images/logo-light.png" alt="" height="20">
-                    </span>
-                </a>
-            </div>
+				<a asp-controller="Home" asp-action="Index" class="logo logo-light">
+					<span class="logo-sm">
+						<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+					</span>
+					<span class="logo-lg">
+						<img src="~/assets/images/logo-recetex.png" alt="" height="50">
+					</span>
+				</a>
+			</div>
 
-            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
-                <i class="fa fa-fw fa-bars"></i>
-            </button>
+			<button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+				<i class="fa fa-fw fa-bars"></i>
+			</button>
 
-            <div data-simplebar class="sidebar-menu-scroll">
+			<div data-simplebar class="sidebar-menu-scroll">
 
-                <!--- Sidemenu -->
-                <div id="sidebar-menu">
-                    <!-- Left Menu Start -->
-                    <ul class="metismenu list-unstyled" id="side-menu">
-                        <li class="menu-title">Menu</li>
-                        <li>
-                            <a asp-action="Index" asp-controller="User">
-                                <i class="bi bi-house"></i><span>Ana Sayfa</span>
-                            </a>
-                        </li>
+				<!--- Sidemenu -->
+				<div id="sidebar-menu">
+					<!-- Left Menu Start -->
+					<ul class="metismenu list-unstyled" id="side-menu">
+						<li class="menu-title">Menü</li>
+						@if (User.IsInRole("Admin"))
+						{
+							<li>
+								<a href="javascript: void(0);" class="has-arrow waves-effect">
+									<i class="fas fa-users-cog"></i>
+									<span>Yönetsel</span>
+								</a>
+								<ul class="sub-menu" aria-expanded="true">
+									<li><a asp-action="Index" asp-controller="User"><i class="fas fa-user-cog"></i><span>Kullanıcı Yönetimi</span></a></li>
+									<li><a asp-controller="Customer" asp-action="Index"><i class="fas fa-user-friends"></i>Müşteriler</a></li>
+									<li><a asp-controller="Medicine" asp-action="Index"><i class="fas fa-prescription-bottle-alt"></i>İlaç Listesi</a></li>
+									<li><a asp-controller="Diagnosis" asp-action="Index"><i class="fas fa-notes-medical"></i>Tanı Listesi</a></li>
+								</ul>
+							</li>
+						}
 
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="uil-window-section"></i>
-                                <span>Yönetsel</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="true">
-                                <li><a asp-controller="User" asp-action="Index">Kullanıcılar</a></li>
+						@*<li>
+						<a href="javascript: void(0);" class="has-arrow waves-effect">
+						<i class="fas fa-clinic-medical"></i>
+						<span>ReçeteX</span>
+						</a>
+						<ul class="sub-menu" aria-expanded="true">
+						<li><a asp-action="Index" asp-controller="Prescription"><i class="fas fa-pencil-alt"></i>Reçete Yaz</a></li>
+						</ul>
+						</li>*@
+					</ul>
+				</div>
+				<!-- Sidebar -->
+			</div>
+		</div>
+		<!-- Left Sidebar End -->
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="main-content">
+
+			<div class="page-content">
+				<div class="container-fluid">
+
+					@RenderBody()
+
+				</div> <!-- container-fluid -->
+			</div>
+			<!-- End Page-content -->
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+							<script>document.write(new Date().getFullYear())</script> © Minible.
+						</div>
+						<div class="col-sm-6">
+							<div class="text-sm-end d-none d-sm-block">
+								Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://themesbrand.com/" target="_blank" class="text-reset">Themesbrand</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<!-- end main content-->
+
+	</div>
+	<!-- END layout-wrapper -->
+	<!-- JAVASCRIPT -->
+	<script src="~/assets/libs/jquery/jquery.min.js"></script>
+	<script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
+	<script src="~/assets/libs/simplebar/simplebar.min.js"></script>
+	<script src="~/assets/libs/node-waves/waves.min.js"></script>
+	<script src="~/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="~/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+	<script src="~/assets/libs/select2/js/select2.min.js"></script>
+	<script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<!-- toastr plugin -->
+	<script src="~/assets/libs/toastr/build/toastr.min.js"></script>
+	@*Bootstrap-touchspin*@
+	<script src="~/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
 
 
-                                <li><a asp-controller="Customer" asp-action="Index">Müşteriler</a></li>
-                                <li><a asp-controller="Medicine" asp-action="Index">İlaç Listesi</a></li>
-                                <li><a asp-controller="Diagnosis" asp-action="Index">Tanı Listesi</a></li>
-                            </ul>
-                        </li>
 
 
-                    </ul>
-                </div>
-                <!-- Sidebar -->
-            </div>
-        </div>
-        <!-- Left Sidebar End -->
-        <!-- ============================================================== -->
-        <!-- Start right Content here -->
-        <!-- ============================================================== -->
-        <div class="main-content">
 
-            <div class="page-content">
-                <div class="container-fluid">
 
-                    @RenderBody()
+	<!-- toastr init -->
+	<script>
+		toastr.options = {
+			"closeButton": true,
+			"progressBar": true,
+			"positionClass": "toast-top-center",
+			"showDuration": "200"
+		}
+	</script>
+	@await RenderSectionAsync("Scripts",false);
 
-                </div> <!-- container-fluid -->
-            </div>
-            <!-- End Page-content -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Minible.
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://themesbrand.com/" target="_blank" class="text-reset">Themesbrand</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <!-- end main content-->
 
-    </div>
-    <!-- END layout-wrapper -->
-    <!-- JAVASCRIPT -->
-    <script src="~/assets/libs/jquery/jquery.min.js"></script>
-    <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="~/assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="~/assets/libs/node-waves/waves.min.js"></script>
-    <script src="~/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="~/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
-    <script src="~/assets/libs/select2/js/select2.min.js"></script>
-    <script src="~/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="~/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "showDuration": "200"
-        }
-    </script>
-    @await RenderSectionAsync("Scripts",false);
 
-    <script src="~/assets/js/pages/dashboard.init.js"></script>
+	<!-- Sweet Alerts js -->
+	<script src="~/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
-    <!-- Sweet Alerts js -->
-    <script src="~/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+	<!-- App js -->
+	<script src="~/assets/js/app.js"></script>
 
-    <!-- Sweet alert init js-->
-    <script src="~/assets/js/pages/sweet-alerts.init.js"></script>
-
-    <!-- App js -->
-    <script src="~/assets/js/app.js"></script>
 
 </body>
 

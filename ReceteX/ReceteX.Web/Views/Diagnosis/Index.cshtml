@@ -1,16 +1,32 @@
-﻿<div>
+﻿﻿<div>
 	<div class="card">
 		<div class="card-header  text-white bg-success bg-gradient">
 			<span class="fs-4">Tanı Listesi</span>
-
-			<a asp-action="UpdateDiagnosisList" asp-controller="Diagnosis" class="btn btn-warning ms-2">Listeyi Güncelle</a>
-
+			<a asp-action="UpdateDiagnosesList" asp-controller="Diagnosis" id="btnUpdate" class="btn btn-warning ms-2">Listeyi Güncelle</a>
 		</div>
 		<div class="card-body">
-			<table id="tblDiagnosis" class="table table-bordered table-striped" style="width:100%">
-				<thead>
-				</thead>
+			<table id="tblDiagnoses" class="table table-bordered table-striped" style="width:100%">
 			</table>
 		</div>
 	</div>
 </div>
+
+@section Scripts{
+	<script>
+		var DataTable;
+		$(document).ready(function () {
+			fillDataTable();
+		})
+
+		function fillDataTable() {
+			DataTable = $('#tblDiagnoses').DataTable({
+				ajax: '/Diagnosis/GetAll',
+				columns: [
+					{ data: 'id', title: 'Id', width: '300px' },
+					{ data: 'code', title: 'Kod' },
+					{ data: 'name', title: 'Tanı Adı' }
+				]
+			});
+		}
+	</script>
+}

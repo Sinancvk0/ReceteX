@@ -22,12 +22,18 @@
             background-color: #007bff;
             color: #fff;
         }
+
+        .bootstrap-touchspin-down {
+            background-color: #f46a6a !important;
+            color: white !important;
+        }
+
     </style>
 }
 
 <div>
     <div class="card">
-        <div class="card-header  text-white bg-success bg-gradient text-center">
+        <div class="card-header text-white bg-success bg-gradient text-center">
             <span class="fs-6">Tanı Ekleme Bölümü</span>
         </div>
         <div class="card-body">
@@ -40,23 +46,269 @@
     </div>
 </div>
 
+
+
+<div class="card border-light mb-3">
+    <div class="card-header text-white bg-success bg-gradient fs-5"><i class="fas fa-prescription-bottle-alt"></i> İlaçlar</div>
+    <div class="card-body">
+
+        <div class="portlet-body" style="overflow: auto">
+
+
+            <table class="table table-hover table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr style="background-color:#edf7f0">
+                        <th class="text-center">İlaç</th>
+                        <th colspan="3" style="width: 250px;" class="text-center">Doz</th>
+                        <th colspan="2" class="text-center">Periyot</th>
+                        <th class="text-center">Kutu</th>
+                        <th class="text-center">Kullanım</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" id="txtMedicine" class="form-control text-center" placeholder="İlk dört harfi yazıp bekleyiniz">
+                            <input type="hidden" id="medicineId" />
+
+
+                        </td>
+
+                        <td>
+                            <input id="txtDose1" type="text" class="form-control text-center touchspin" style="width: 45px;" value="2">
+                        </td>
+                        <td class="align-middle">X</td>
+                        <td>
+                            <input id="txtDose2" style="width: 45px;" type="text" class="form-control text-center touchspin" value="1">
+                        </td>
+
+
+                        <td>
+
+                            <select class="form-select" id="ddlMedicineUsagePeriods"></select>
+                        </td>
+                        <td>
+                            <input id="txtPeriod" type="text" style="width: 45px;" class="form-control text-center touchspin" value="1">
+
+                        </td>
+
+
+                        <td>
+
+                            <input id="txtQuantity" style="width: 35px;" type="text" class="form-control text-center touchspin" value="1">
+                        </td>
+                        <td>
+                            <select class="form-select" id="ddlMedicineUsageTypes">
+                            </select>
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="text-center">
+                            <a href="#" class="btn btn-warning d-block w-100 h-100 d-none" onclick="addMedicine()" id="btnAddMedicine"> <i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i> &nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;K&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>  &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i> </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>İlaç</th>
+                        <th>Doz</th>
+                        <th>Periyot</th>
+                        <th>Kutu</th>
+                        <th>Kullanım</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="tblMedicines">
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+
+<div class="card border-light mb-3">
+    <div class="card-header text-white bg-success bg-gradient fs-5"> <i class="fas fa-comment-medical"></i> Açıklamalar</div>
+    <div class="card-body">
+        <table class="table table-hover table-bordered text-center">
+            <thead>
+                <tr class="text-center">
+                    <th>Açıklama Türü</th>
+                    <th>Açıklama</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select class="form-select" id="ddlDescriptionTypes">
+                           <option value="0" >Lütfen Seçiniz</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="txtAciklama" readonly placeholder="Açıklama eklemek için Açıklama türünü seçmelisiniz." class="form-control">
+                    </td>
+                    <td><input type="button" id="ekleButton" class="btn btn-success" value="Ekle"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Açıklama Türü</th>
+                    <th>Açıklama</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<div class="card border-light mb-3">
+    <div class="card-header text-white bg-success bg-gradient fs-5"><i class="fas fa-user-cog"></i> Hasta Bilgileri</div>
+    <div class="card-body">
+        <form action="" class="form-control">
+            <div class="mb-3">
+                <label for="HastaTCNO" class="form-label">Hasta T.C Kimlik No</label>
+                <input type="text" maxlength="11" placeholder="Hastaya ait 11 Haneli Tc Kimlik No giriniz" id="HastaTCNO" class="form-control input-mask" data-inputmask="'mask': '9', 'repeat': 11, 'greedy' : false">
+            </div>
+            <div class="mb-3">
+                <label for="HastaGsm" class="form-label">Hasta GSM</label>
+                <input type="text" placeholder="Başında sıfır olmadan hastanın telefon numarasını giriniz" id="HastaGsm" class="form-control input-mask" data-inputmask=" 'mask' : '999-999-99-99' ">
+            </div>
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </form>
+    </div>
+</div>
+
 @section Scripts{
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/assets/libs/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 
 
     <script>
-        function fillDiagnoses()
-        {
+        function fillDiagnoses() {
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: '@Url.Action("GetDiagnoses", "Prescription")',
-                data:{prescriptionId:'@Model.Id'},
-                success:function(res){
+                data: { prescriptionId: '@Model.Id' },
+                success: function (res) {
                     $("#divDiagnoses").empty();
-                    for(var diagnose of res[0].diagnoses)
-                    $("#divDiagnoses").append(`<div>${diagnose.name}</div>`);
+                    for (var diagnose of res[0].diagnoses) {
+                        $("#divDiagnoses").append(`<div>${diagnose.code} ${diagnose.name} <a href="#" onclick="removeDiagnosis('${diagnose.id}')" class="btn btn-sm btn-danger"><i class="dripicons-trash"></i></a></div>`);
+                    }
+
+                }
+            });
+        }
+        function fillPrescriptionMedicines() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetMedicines", "Prescription")',
+                data: { prescriptionId: '@Model.Id' },
+                success: function (res) {
+                    $("#tblMedicines").empty();
+                    for (var medicine of res.prescriptionMedicines) {
+                        $("#tblMedicines").append(`<tr>
+                                        <td>${medicine.medicine.name}</td>
+                                                <td>${medicine.dose1} X ${medicine.dose2}</td>
+                                                                <td>${medicine.medicineUsagePeriod.name} ${medicine.period} Kez</td>
+                                                <td>${medicine.quantity}</td>
+                                                        <td>${medicine.medicineUsageType.name}</td>
+                                                                <td><a  class="btn btn-danger" onclick="removeMedicine('${medicine.id}')"><i class="dripicons-trash"></i></a></td>
+
+                                        </tr>`);
+                    }
+
+                }
+            });
+        }
+
+
+        function fillTypes() {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetAll", "MedicineUsageType")',
+
+                success: function (res) {
+
+                    for (var medicineUsageType of res) {
+
+                        $("#ddlMedicineUsageTypes").append(new Option(medicineUsageType.name, medicineUsageType.remoteId + "|" + medicineUsageType.id));
+                    }
+
+                }
+
+            });
+
+          //----------------Açıklama 
+
+            $("#ekleButton").hide();
+
+            // Bind event handler to the dropdown list
+            $("#ddlDescriptionTypes").on("change", function () {
+                var selectedValue = $(this).val();
+                var description = $("#txtAciklama").val();
+
+                // Show or hide the "Ekle" button based on the selected value and description
+                if (selectedValue !== "0" && description.trim() !== "") {
+                    $("#ekleButton").show();
+                } else {
+                    $("#ekleButton").hide();
+                }
+            });
+
+            // Bind event handler to the input field
+            $("#txtAciklama").on("input", function () {
+                var selectedValue = $("#ddlDescriptionTypes").val();
+                var description = $(this).val();
+
+                // Show or hide the "Ekle" button based on the selected value and description
+                if (selectedValue !== "0" && description.trim() !== "") {
+                    $("#ekleButton").show();
+                } else {
+                    $("#ekleButton").hide();
+                }
+            });
+
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetAll", "DescriptionType")',
+
+                success: function (res) {
+
+                    for (var descriptionType of res) {
+
+                        $("#ddlDescriptionTypes").append(new Option(descriptionType.name, descriptionType.remoteId + "|" + descriptionType.id));
+                    }
+
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetAll", "MedicineUsagePeriod")',
+
+                success: function (res) {
+
+                    for (var medicineUsagePeriod of res) {
+
+                        $("#ddlMedicineUsagePeriods").append(new Option(medicineUsagePeriod.name, medicineUsagePeriod.remoteId + "|" + medicineUsagePeriod.id));
+                    }
+
                 }
             });
         }
@@ -70,20 +322,131 @@
                 }
             });
         }
+        function addMedicine() {
+            let prescriptionId = '@Model.Id';
+            let medicineId = $("#medicineId").val();
+            let dose1 = $("#txtDose1").val();
+            let dose2 = $("#txtDose2").val();
+            let period = $("#txtPeriod").val();
+            let medicineUsagePeriodId = $("#ddlMedicineUsagePeriods").val().split('|')[1];
+            let quantity = $("#txtQuantity").val();
+            let medicineUsageTypeId = $("#ddlMedicineUsageTypes").val().split('|')[1];
+
+            let medicine = {
+                prescriptionId: prescriptionId,
+                medicineId: medicineId,
+                quantity: quantity,
+                dose1: dose1,
+                dose2: dose2,
+                period: period,
+                medicineUsagePeriodId: medicineUsagePeriodId,
+                medicineUsageTypeId: medicineUsageTypeId
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddMedicine", "Prescription")',
+                data: {
+                    prescriptionId: prescriptionId,
+                    prescriptionMedicine: medicine
+                },
+                success: function (res) {
+                    fillPrescriptionMedicines();
+                    $("#txtMedicine").val('');
+                    $("#txtDose1").val('2');
+                    $("#txtDose2").val('1');
+                    $("#txtPeriod").val('1');
+                    $("#txtQuantity").val('1');
+                    $('#btnAddMedicine').stop().fadeOut(500, function () {
+                        $('#btnAddMedicine').addClass('d-none');
+                    });
+
+                }
+
+            });
+
+        }
+
+        function removeMedicine(prescriptionMedicineId) {
+            Swal.fire({
+                title: 'İlacı listeden kaldırmak istediğinizden emin misiniz?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Evet',
+                denyButtonText: `Hayır`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("RemoveMedicine","Prescription")',
+                        data: {
+                            prescriptionId: '@Model.Id',
+                            prescriptionMedicineId: prescriptionMedicineId
+
+                        },
+                        success: function (res) {
+                            fillPrescriptionMedicines();
+                        }
+                    })
+
+                }
+            })
+
+
+
+
+        }
+
+        function removeDiagnosis(diagnosisId) {
+            Swal.fire({
+                title: 'Tanıyı listeden kaldırmak istediğinizden emin misiniz?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Evet',
+                denyButtonText: `Hayır`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("RemoveDiagnosis","Prescription")',
+                        data: {
+                            prescriptionId: '@Model.Id',
+                            diagnosisId: diagnosisId
+
+                        },
+                        success: function (res) {
+                            fillDiagnoses();
+                        }
+                    })
+
+                }
+            })
+
+
+
+
+        }
 
         $(function () {
+            fillTypes();
+            $(".touchspin").TouchSpin({ min: 0, max: 100, step: 1, decimals: 0 });
+            $(".input-mask").inputmask();
 
 
 
 
             $("#diagnosis").autocomplete({
                 source: function (request, response) {
+                    console.log(response);
                     $.ajax({
                         url: '@Url.Action("SearchDiagnosis", "Diagnosis")',
                         data: { searchTerm: request.term },
                         dataType: "json",
                         type: "GET",
                         success: function (data) {
+                            console.log(data);
                             response($.map(data, function (item) {
                                 return {
                                     label: item.name,
@@ -101,6 +464,37 @@
                     return false;
                 }
             });
+
+            $("#txtMedicine").autocomplete({
+                source: function (request, response) {
+                    console.log(response);
+                    $.ajax({
+                        url: '@Url.Action("SearchMedicine", "Medicine")',
+                        data: { searchTerm: request.term },
+                        dataType: "json",
+                        type: "GET",
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 3,
+                select: function (event, ui) {
+                    $("#txtMedicine").val(ui.item.label);
+                    $("#medicineId").val(ui.item.value);
+                    $('#btnAddMedicine').removeClass('d-none').stop().animate({ opacity: 1 }, 500);
+                    //addDiagnosis(ui.item.value);
+                    return false;
+                }
+            });
+
+
         });
     </script>
 
