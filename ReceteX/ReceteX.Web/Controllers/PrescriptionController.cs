@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReceteX.Models;
 using ReceteX.Repository.Shared.Abstract;
+using ReceteX.Repository.Shared.Concrete;
 using System.Security.Claims;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace ReceteX.Web.Controllers
 {
@@ -64,14 +67,21 @@ namespace ReceteX.Web.Controllers
 
         }
 
+
         [HttpPost]
-        public IActionResult AddDescription(Guid prescriptionId, Description description)
+        public IActionResult AddDescription(Description description)
         {
-            Prescription asil = unitOfWork.Prescriptions.GetFirstOrDefault(p => p.Id == prescriptionId);
-            asil.Descriptions.Add(description);
-            unitOfWork.Prescriptions.Update(asil);
+            unitOfWork.Descriptions.Add(description);
             unitOfWork.Save();
             return Ok();
+        }
+
+
+
+        [HttpPost]
+        public JsonResult GetDescriptions(Guid prescriptionId)
+        {
+            return Json(unitOfWork.Descriptions.GetAll(d => d.PrescriptionId == prescriptionId).Include(d => d.DescriptionType));
         }
 
         [HttpPost]
@@ -100,12 +110,12 @@ namespace ReceteX.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult RemoveDescription(Guid prescriptionId, Guid descriptionId)
+        public IActionResult RemoveDescription(Guid descriptionId)
         {
-            Prescription asil = unitOfWork.Prescriptions.GetAll(p => p.Id == prescriptionId).Include(p => p.Descriptions).First();
-            asil.Descriptions.Remove(asil.Descriptions.FirstOrDefault(d => d.Id == descriptionId));
 
-            unitOfWork.Prescriptions.Update(asil);
+            unitOfWork.Descriptions.Remove(descriptionId);
+
+
             unitOfWork.Save();
             return Ok();
 
@@ -120,8 +130,57 @@ namespace ReceteX.Web.Controllers
             unitOfWork.Prescriptions.Update(asil);
             unitOfWork.Save();
             return Ok();
-
         }
+        //public IActionResult CreateXml(Prescription prescription, Guid prescriptioId)
+        //{
+        //    Prescription asil = unitOfWork.Prescriptions.GetAll(p => p.Id == prescriptioId)
+        //        .Include(p => p.PrescriptionMedicines).ThenInclude(m => m.Medicine).Include(p => p.PrescriptionMedicines)
+        //        .ThenInclude(u => u.MedicineUsagePeriod).Include(p => p.PrescriptionMedicines)
+        //        .ThenInclude(t => t.MedicineUsageType).Include(p => p.Diagnoses).Include(p => p.AppUser).First();
+
+
+        //    XmlDocument xmlDoc = new XmlDocument();
+        //    XmlElement root = xmlDoc.CreateElement("Prescription");
+        //    xmlDoc.AppendChild(root);
+        //}
+
+
+
+        // ...
+
+        public IActionResult CreateXml(Prescription prescription, Guid prescriptionId)
+        {
+            Prescription asil = unitOfWork.Prescriptions.GetAll(p => p.Id == prescriptionId)
+                .Include(p => p.PrescriptionMedicines).ThenInclude(m => m.Medicine).Include(p => p.PrescriptionMedicines)
+                .ThenInclude(u => u.MedicineUsagePeriod).Include(p => p.PrescriptionMedicines)
+                .ThenInclude(t => t.MedicineUsageType).Include(p => p.Diagnoses).Include(p => p.AppUser).First();
+
+            // Prescription nesnesini XML dosyasına dönüştürmek için XmlSerializer kullanılır.
+            XmlSerializer serializer = new XmlSerializer(typeof(Prescription));
+
+            // XML dosyasını oluşturmak için MemoryStream kullanılır.
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                // Prescription nesnesini XML dosyasına yazma
+                serializer.Serialize(memoryStream, asil);
+
+                // MemoryStream'i okuma konumunu sıfırla
+                memoryStream.Position = 0;
+
+                // MemoryStream'deki veriyi XML dosyasına yazma
+                using (StreamReader streamReader = new StreamReader(memoryStream))
+                {
+                    string xmlContent = streamReader.ReadToEnd();
+
+                    // XML dosyasını belirli bir yola kaydetme
+                    string dosyaYolu = "dosya.xml";
+                    System.IO.File.WriteAllText(dosyaYolu, xmlContent);
+                }
+            }
+
+            return Ok();
+        }
+
 
 
 

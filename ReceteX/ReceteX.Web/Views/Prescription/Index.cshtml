@@ -152,13 +152,13 @@
                 <tr>
                     <td>
                         <select class="form-select" id="ddlDescriptionTypes">
-                           <option value="0" >Lütfen Seçiniz</option>
+                            <option value="0">Lütfen Seçiniz</option>
                         </select>
                     </td>
                     <td>
-                        <input type="text" id="txtAciklama" readonly placeholder="Açıklama eklemek için Açıklama türünü seçmelisiniz." class="form-control">
+                        <input type="text" id="txtDescription" readonly placeholder="Açıklama eklmek için önce türünü seçmelisiniz" class="form-control">
                     </td>
-                    <td><input type="button" id="ekleButton" class="btn btn-success" value="Ekle"></td>
+                    <td class="text-center"><a id="btnAddDescription" onclick="addDescription()" class="btn btn-success d-none">Ekle</a></td>
                 </tr>
             </tbody>
         </table>
@@ -171,6 +171,8 @@
                     <th>İşlemler</th>
                 </tr>
             </thead>
+            <tbody id="tblDescriptions">
+            </tbody>
         </table>
     </div>
 </div>
@@ -185,7 +187,7 @@
             </div>
             <div class="mb-3">
                 <label for="HastaGsm" class="form-label">Hasta GSM</label>
-                <input type="text" placeholder="Başında sıfır olmadan hastanın telefon numarasını giriniz" id="HastaGsm" class="form-control input-mask" data-inputmask=" 'mask' : '999-999-99-99' ">
+                <input type="text" placeholder="Başında sıfır olmadan hastanın telefon numarasını giriniz" id="HastaGsm" class="form-control input-mask" data-inputmask=" 'mask' : '599-999-99-99' ">
             </div>
             <button type="submit" class="btn btn-success">Kaydet</button>
         </form>
@@ -236,7 +238,64 @@
                 }
             });
         }
+        function fillDescriptions() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetDescriptions","Prescription")',
+                data: {
+                    prescriptionId: '@Model.Id'
+                },
+                success: function (res) {
+                    $("#tblDescriptions").empty();
+                    for (var description of res) {
+                        $("#tblDescriptions").append(`
+                                    <tr>
+                                            <td>${description.descriptionType.name}</td>
+                                            <td>${description.text}</td>
+                                            <td class="text-center"><a onclick="removeDescription('${description.id}')" class="btn btn-danger"><i class="dripicons-trash"></i></a></td>
+                                    `);
+                    }
 
+                }
+
+            })
+        }
+        function removeDescription(descriptionId) {
+            Swal.fire({
+                title: 'Silmek istediğinizden emin misiniz ?',
+
+                showCancelButton: true,
+                confirmButtonText: 'Kaydet',
+                cancelButtonText: 'Vazgeç'
+
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("RemoveDescription","Prescription")',
+                        data: {
+                            descriptionId: descriptionId
+                        },
+                        success: function (res) {
+                            fillDescriptions();
+                        }
+
+                    })
+
+
+                } else {
+                    Swal.fire('Silme işlemi iptal edilmiştir.', '', 'info')
+                }
+            })
+
+
+
+
+
+
+        }
 
         function fillTypes() {
             $.ajax({
@@ -251,40 +310,7 @@
                     }
 
                 }
-
             });
-
-          //----------------Açıklama 
-
-            $("#ekleButton").hide();
-
-            // Bind event handler to the dropdown list
-            $("#ddlDescriptionTypes").on("change", function () {
-                var selectedValue = $(this).val();
-                var description = $("#txtAciklama").val();
-
-                // Show or hide the "Ekle" button based on the selected value and description
-                if (selectedValue !== "0" && description.trim() !== "") {
-                    $("#ekleButton").show();
-                } else {
-                    $("#ekleButton").hide();
-                }
-            });
-
-            // Bind event handler to the input field
-            $("#txtAciklama").on("input", function () {
-                var selectedValue = $("#ddlDescriptionTypes").val();
-                var description = $(this).val();
-
-                // Show or hide the "Ekle" button based on the selected value and description
-                if (selectedValue !== "0" && description.trim() !== "") {
-                    $("#ekleButton").show();
-                } else {
-                    $("#ekleButton").hide();
-                }
-            });
-
-
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("GetAll", "DescriptionType")',
@@ -292,7 +318,6 @@
                 success: function (res) {
 
                     for (var descriptionType of res) {
-
                         $("#ddlDescriptionTypes").append(new Option(descriptionType.name, descriptionType.remoteId + "|" + descriptionType.id));
                     }
 
@@ -367,6 +392,36 @@
 
         }
 
+        function addDescription() {
+            let descriptionText = $("#txtDescription").val();
+            let descriptionTypeId = $("#ddlDescriptionTypes").val().split('|')[1];
+            let prescriptionId = '@Model.Id';
+
+
+            let description = {
+                text: descriptionText,
+                descriptionTypeId: descriptionTypeId,
+                prescriptionId: prescriptionId
+            }
+
+
+            let data = {
+                description: description
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddDescription","Prescription")',
+                data: data,
+                success: function (res) {
+                    fillDescriptions();
+                }
+            })
+
+
+
+        }
+
         function removeMedicine(prescriptionMedicineId) {
             Swal.fire({
                 title: 'İlacı listeden kaldırmak istediğinizden emin misiniz?',
@@ -433,6 +488,25 @@
             fillTypes();
             $(".touchspin").TouchSpin({ min: 0, max: 100, step: 1, decimals: 0 });
             $(".input-mask").inputmask();
+
+            $("#ddlDescriptionTypes").on('change', function () {
+                if ($("#ddlDescriptionTypes").val() != '0')
+                    $("#txtDescription").removeAttr('readonly');
+                else {
+                    $("#txtDescription").attr('readonly', true).val('');
+                    $("#btnAddDescription").addClass("d-none");
+                }
+
+            });
+            $("#txtDescription").on('keyup', function (res) {
+                console.log("keyup tetiklendi");
+                if ($("#txtDescription").val().length >= 3 && $("#ddlDescriptionTypes").val() != "0")
+                    $("#btnAddDescription").removeClass("d-none");
+                else
+                    $("#btnAddDescription").addClass("d-none");
+
+
+            });
 
 
 

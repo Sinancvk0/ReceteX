@@ -131,7 +131,7 @@ namespace ReceteX.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PrescriptionId")
+                    b.Property<Guid>("PrescriptionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
@@ -421,11 +421,15 @@ namespace ReceteX.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ReceteX.Models.Prescription", null)
+                    b.HasOne("ReceteX.Models.Prescription", "Prescription")
                         .WithMany("Descriptions")
-                        .HasForeignKey("PrescriptionId");
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DescriptionType");
+
+                    b.Navigation("Prescription");
                 });
 
             modelBuilder.Entity("ReceteX.Models.Prescription", b =>

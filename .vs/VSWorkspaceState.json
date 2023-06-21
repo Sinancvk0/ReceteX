@@ -1,16 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\ReceteX",
-    "\\ReceteX\\ReceteX.Repository",
-    "\\ReceteX\\ReceteX.Repository\\Shared",
-    "\\ReceteX\\ReceteX.Repository\\Shared\\Abstract",
-    "\\ReceteX\\ReceteX.Web\\Controllers",
-    "\\ReceteX\\ReceteX.Web\\Views",
-    "\\ReceteX\\ReceteX.Web\\Views\\Customer",
-    "\\ReceteX\\ReceteX.Web\\Views\\Diagnosis",
-    "\\ReceteX\\ReceteX.Web\\Views\\Home"
+    ""
   ],
-  "SelectedNode": "\\ReceteX\\ReceteX.Repository\\Shared\\Abstract\\IUnitOfWork.cs",
+  "SelectedNode": "\\ReceteX.sln",
   "PreviewInSolutionExplorer": false
 }
